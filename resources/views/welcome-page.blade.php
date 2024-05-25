@@ -214,7 +214,6 @@
     </div>
 
     {{-- Footer --}}
-
     <footer>
         <div class="first_part">
             <div class="footer_container">
