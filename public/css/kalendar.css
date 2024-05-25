@@ -59,32 +59,11 @@
     border-color: transparent !important;
 }
 
- /* .fc-direction-ltr .fc-button-group>.fc-timeGridWeek-button:not(:last-child) {
-     color: #000;
-     background-color: #ffffff;
- }
-
- .fc-direction-ltr .fc-button-group>.fc-timeGridDay-button:not(:first-child) {
-     color: #000;
-     background-color: #ffffff;
- } */
-
- /* .fc-day-today {
-     background: rgba(50, 120, 136, 0.05) !important;
-     border: none !important;
- } */
-
- /* .fc .fc-button-primary:hover {
-     border-color: transparent;
- } */
 
  .fc-event:hover {
      cursor: pointer !important;
  }
 
- /* .fc td {
-    background: linear-gradient(to left top, #393440, #25202c 70%);
-} */
 
 /* Ensure the day grid table does not collapse borders */
 .fc .fc-daygrid {
@@ -106,7 +85,7 @@
     border: 1px solid #3a3a3a !important;
     border-radius: 10px !important; /* Rounded corners */
     background: linear-gradient(to left top, #393440, #25202c 70%);
-    height: 150px;
+    height: 200px;
 }
 
 /* Adjust the container to ensure proper spacing */
@@ -142,6 +121,107 @@
     padding: 2px 5px; /* Padding for better readability */
     margin-bottom: 2px; /* Space between events */
 }
+
+
+.fc-popover {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.fc-popover .fc-header {
+    background-color: #f00; /* Custom header color */
+    color: #fff; /* Custom text color */
+}
+
+.fc-daygrid-day-events {
+    max-height: 125px; /* Adjust this height as needed */
+    overflow-y: auto;
+  }
+
+  .fc-daygrid-event {
+    margin-bottom: 5px; /* Space between events */
+  }
+
+  /* Style the scrollbar for webkit browsers */
+.fc-daygrid-day-events::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  .fc-daygrid-day-events::-webkit-scrollbar-track {
+    background: #2a2a2a; /* Background color of the scrollbar track */
+    border-radius: 10px;
+  }
+
+  .fc-daygrid-day-events::-webkit-scrollbar-thumb {
+    background-color: #824ae2; /* Scrollbar color */
+    border-radius: 10px;
+    border: 3px solid #2a2a2a; /* Space between the thumb and track */
+  }
+
+  /* Style for Firefox */
+  .fc-daygrid-day-events {
+    scrollbar-color: #824ae2 #2a2a2a;
+    scrollbar-width: thin;
+  }
+
+
+/* Popup container */
+#popup {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+  }
+
+  /* Popup content */
+  #popup-content {
+    padding: 20px;
+  }
+
+  #popup h2 {
+    margin-top: 0;
+    font-size: 24px;
+    background-color: #824ae2;
+    color: #fff;
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  #popup ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  #popup li {
+    background: #f4f4f4;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  #close-popup {
+    background: #dc3545;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+  }
+
+
+
+
 
 
  /* .shift-calendar .fc-event:hover::after {

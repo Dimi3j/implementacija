@@ -110,7 +110,7 @@
 .custom-shape {
     width: 400px; /* Adjust width as needed */
     height: 200px; /* Adjust height as needed */
-    background-image: url(./assets/pic1.png);
+    background-image: url(./../images/pic1.png);
     background-size: cover;
     z-index: -1;
     clip-path: polygon(0 0, 100% 0, 100% 70%, 80% 100%, 100% 100%, 0 100%, 0 20%); /* Adjust the points to create your desired shape */
