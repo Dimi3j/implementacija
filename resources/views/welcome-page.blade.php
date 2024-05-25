@@ -55,41 +55,13 @@
                     right: "next",
                 },
                 events: [
+                    @foreach($events as $event)
                     {
-                        title: "Brainster Event",
-                        start: "2024-05-26T20:00:00",
-                        className: "fc-event-brainster",
+                        title: "{{ $event->title }}",
+                        start: "{{ $event->from }}",
+                        className: "fc-event-{{ $event->user_id }}", // somehow do this $event->user_id->name OR a better solution put another row in the database for the event organizator
                     },
-                    {
-                        title: "MOB Event",
-                        start: "2024-05-26T22:00:00",
-                        className: "fc-event-mob",
-                    },
-                    {
-                        title: "MOB Event",
-                        start: "2024-05-26T22:00:00",
-                        className: "fc-event-mob",
-                    },
-                    {
-                        title: "MOB Event",
-                        start: "2024-05-26T22:00:00",
-                        className: "fc-event-mob",
-                    },
-                    {
-                        title: "MOB Event",
-                        start: "2024-05-26T22:00:00",
-                        className: "fc-event-mob",
-                    },
-                    {
-                        title: "MOB Event",
-                        start: "2024-05-26T22:00:00",
-                        className: "fc-event-mob",
-                    },
-                    {
-                        title: "MOB Event",
-                        start: "2024-05-26T22:00:00",
-                        className: "fc-event-mob",
-                    }
+                    @endforeach
                 ],
                 eventContent: function(arg) {
                     return {
