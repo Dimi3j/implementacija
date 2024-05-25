@@ -14,16 +14,11 @@ class CitiesSeeder extends Seeder
     public function run()
     {
         $cities = [
-            ['name' => 'New York'],
-            ['name' => 'Los Angeles'],
-            ['name' => 'Chicago'],
-            ['name' => 'Houston'],
-            ['name' => 'Phoenix'],
-            ['name' => 'Philadelphia'],
-            ['name' => 'San Antonio'],
-            ['name' => 'San Diego'],
-            ['name' => 'Dallas'],
-            ['name' => 'San Jose'],
+            ['name' => 'Skopje'],
+            ['name' => 'Dojran'],
+            ['name' => 'Belgrade'],
+            ['name' => 'Ohrid'],
+            ['name' => 'Sofia'],
         ];
 
         foreach ($cities as $city) {
