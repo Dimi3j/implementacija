@@ -1,0 +1,215 @@
+:root {
+    --fc-border-color: none;
+}
+
+
+.calendar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 34px 0px;
+}
+
+.calendar-wrapper {
+    width: 80%; /* Maintain the specified width of the calendar wrapper */
+}
+
+ .fc .fc-timegrid-slot {
+     height: 3em;
+ }
+
+ .fc .fc-scrollgrid,
+ .fc .fc-scrollgrid table {
+     border-radius: 10px;
+     overflow: hidden;
+ }
+
+ .fc-header-toolbar{
+    border: 2px solid #824ae2;
+    border-top-left-radius: 10px;  /* Radius for the top-left corner */
+    border-top-right-radius: 10px; /* Radius for the top-right corner */
+ }
+
+ #fc-dom-1{
+    color: #ffffff;
+    font-size: 24px;
+ }
+
+ .fc .fc-button:not(:disabled) {
+    color: #fff;
+    background-color: #765c99 !important;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+
+.fc-col-header-cell .fc-day .fc-day-mon{
+    background-color: red !important;
+}
+
+.fc-theme-standard th{
+    border-color: transparent !important;
+    background-color: transparent !important;
+    color: #fff;
+    font-size: 16px;
+}
+
+.fc-view-harness .fc-view-harness-passive{
+    border-color: transparent !important;
+}
+
+ /* .fc-direction-ltr .fc-button-group>.fc-timeGridWeek-button:not(:last-child) {
+     color: #000;
+     background-color: #ffffff;
+ }
+
+ .fc-direction-ltr .fc-button-group>.fc-timeGridDay-button:not(:first-child) {
+     color: #000;
+     background-color: #ffffff;
+ } */
+
+ /* .fc-day-today {
+     background: rgba(50, 120, 136, 0.05) !important;
+     border: none !important;
+ } */
+
+ /* .fc .fc-button-primary:hover {
+     border-color: transparent;
+ } */
+
+ .fc-event:hover {
+     cursor: pointer !important;
+ }
+
+ /* .fc td {
+    background: linear-gradient(to left top, #393440, #25202c 70%);
+} */
+
+/* Ensure the day grid table does not collapse borders */
+.fc .fc-daygrid {
+    border-collapse: separate !important;
+    border-spacing: 8px !important; /* Adjust spacing between cells */
+}
+
+/* Style each day cell */
+.fc .fc-daygrid-day {
+    padding: 0 !important; /* Remove default padding to avoid double spacing */
+}
+
+/* Style the inner frame of each day cell */
+.fc .fc-daygrid-day-frame {
+    margin: 8px !important; /* Space between the day cells */
+    padding: 12px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional: Shadow for depth */
+    box-sizing: border-box;
+    border: 1px solid #3a3a3a !important;
+    border-radius: 10px !important; /* Rounded corners */
+    background: linear-gradient(to left top, #393440, #25202c 70%);
+    height: 150px;
+}
+
+/* Adjust the container to ensure proper spacing */
+.fc .fc-scroller-harness {
+    padding: 8px; /* Adjust the padding around the whole calendar */
+}
+
+
+/* Optional: Custom styling for event elements */
+.fc-event {
+    border-radius: 5px; /* Rounded corners for events */
+    overflow: hidden; /* Ensure content doesn't overflow */
+}
+
+/* Custom styling for event time and title */
+.fc-event-time, .fc-event-title {
+    display: block; /* Ensure they are block elements */
+}
+
+/* Specific color and style adjustments for events */
+.fc-event-brainster {
+    background: #ffc107; /* Custom background color for Brainster events */
+    color: #000; /* Text color */
+}
+
+.fc-event-mob {
+    background: #dc3545; /* Custom background color for MOB events */
+    color: #fff; /* Text color */
+}
+
+/* General styling for event types */
+.fc-event {
+    padding: 2px 5px; /* Padding for better readability */
+    margin-bottom: 2px; /* Space between events */
+}
+
+
+ /* .shift-calendar .fc-event:hover::after {
+     content: '👀';
+     text-align: center;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+
+     color: white;
+     font-size: 1.5rem;
+     font-weight: bolder;
+
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     width: 100%;
+     height: 100%;
+     border-radius: inherit;
+     background: rgba(255, 255, 255, 0.25);
+     backdrop-filter: blur(2px);
+     -webkit-backdrop-filter: blur(2px);
+     outline: 2px solid rgba(255, 255, 255, 0.85);
+     z-index: 100;
+
+     animation: open-popup-anim;
+     animation-duration: .2s;
+     animation-timing-function: ease-in-out;
+     animation-fill-mode: forwards;
+     opacity: 0;
+ } */
+
+/*  .fc .fc-button-primary:not(:disabled).fc-button-active,
+ .fc .fc-button-primary:not(:disabled):active {
+     color: #fff;
+     background-color: #B98D78;
+     border-color: transparent;
+ }
+
+ .fc .fc-button-primary {
+     border-color: transparent;
+ }
+
+ .fc .fc-button-primary:disabled {
+     color: #fff;
+     background-color: #B98D78;
+     border-color: transparent;
+ }
+
+ .fc .fc-button:not(:disabled) {
+     color: #fff;
+     background-color: #B98D78;
+ }
+
+ .fc .fc-timegrid-axis-cushion {
+     white-space: nowrap;
+ }
+
+ .fc .fc-bg-event .fc-event-title {
+     color: white;
+ }
+*/
+ .fc-daygrid-day-top{
+    flex-direction: row !important;
+ }
+
+ .fc-daygrid-day-number{
+    color: #7142bf;
+ }
