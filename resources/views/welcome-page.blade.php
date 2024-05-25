@@ -162,71 +162,7 @@
     </section>
 
 
-    <!-- Hero del 2, Toj so kartickite -->
-    {{-- <section id="Hero2">
-        <div class="swiper-container2">
-            <div class="swiper mySwiper2">
-                <div class="swiper-wrapper swiper-wrapper2">
-                    <div class="swiper-slide swiper-slide2" onclick="mitre(0)">
-                        <div class="custom-shape">
-                            <div class="little_card">
-                                <h1>Brainster 1</h1>
-                                <div class="little_info">
-                                    <p>01.03.2024</p>
-                                    <p>20:00h</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide swiper-slide2" onclick="mitre(1)">
-                        <div class="custom-shape">
-                            <div class="little_card">
-                                <h1>Brainster 2</h1>
-                                <div class="little_info">
-                                    <p>01.03.2024</p>
-                                    <p>20:00h</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide swiper-slide2" onclick="mitre(2)">
-                        <div class="custom-shape">
-                            <div class="little_card">
-                                <h1>Brainster 3</h1>
-                                <div class="little_info">
-                                    <p>01.03.2024</p>
-                                    <p>20:00h</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide swiper-slide2" onclick="mitre(3)">
-                        <div class="custom-shape">
-                            <div class="little_card">
-                                <h1>Brainster 4</h1>
-                                <div class="little_info">
-                                    <p>01.03.2024</p>
-                                    <p>20:00h</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide swiper-slide2" onclick="mitre(4)">
-                        <div class="custom-shape">
-                            <div class="little_card">
-                                <h1>Brainster 5</h1>
-                                <div class="little_info">
-                                    <p>01.03.2024</p>
-                                    <p>20:00h</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
+    {{-- Hero del 2, Toj so kartickite --}}
     <section id="Hero2">
         <div class="swiper-container2">
             <div class="swiper mySwiper2">
@@ -250,7 +186,7 @@
     </section>
 
 
-    <!-- Skriptite za da rabotat swipers -->
+    {{-- Skriptite za da rabotat swipers --}}
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <div class="vecer">
@@ -261,14 +197,14 @@
         </div>
     </div>
 
-    <!-- Kalendarot kade treba da ide -->
+    {{-- Kalendarot kade treba da ide --}}
     <section class="calendar-container">
         <div class="calendar-wrapper">
             <div id="calendar"></div>
         </div>
     </section>
 
-    <!-- Kopce -->
+    {{-- Kopce --}}
 
     <div id="overlay" class="overlay"></div>
 
@@ -277,7 +213,7 @@
         <p>This is the popup content.</p>
     </div>
 
-    <!-- Footer -->
+    {{-- Footer --}}
 
     <footer>
         <div class="first_part">
@@ -334,7 +270,7 @@
         </div>
     </footer>
 
-    <!-- Skriptite za da rabotat swipers -->
+    {{-- Skriptite za da rabotat swipers --}}
     <script>
         var swiper = new Swiper(".mySwiper", {
             autoplay: {
