@@ -110,7 +110,7 @@
 </head>
 
 <body>
-    <!-- Navbar -->
+    {{-- Navbar --}}
     <nav class="main_nav">
         <div class="nav_container">
             <div class="logo">
@@ -128,7 +128,7 @@
 
                     </button>
                     <div class="dropdown-content">
-                        <a href="#">Англиски</a> <!-- find a package that translates to english -->
+                        <a href="#">Англиски</a> {{-- find a package that translates to english --}}
                         <a href="#">Македонски</a>
                     </div>
                 </div>
@@ -136,105 +136,34 @@
         </div>
     </nav>
 
-    <!-- Hero -->
+    {{-- Hero --}}
     <section id="Hero">
         <div class="swiper-container">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-
-                    <!-- Vo swiper slide ke treba slikata od baza da se zeme -->
-                    <!-- I da se dodade vo style da se dodade slikata background-image: url(./assets/pic1.png); primer kako bi licelo -->
-                    <div class="swiper-slide">
-                        <div class="mini-container">
-                            <div class="hero-continer">
-                                <div class="hero-details">
-                                    <!-- get the tittle from database -->
-                                    <p class="Hero-text">Biggest brainster Party1</p>
-
-                                    <div class="hero-time">
-                                        <!-- get the date and time from the database -->
-                                        <p>01.03.2024</p>
-                                        <p>20:00h</p>
+                    @foreach($events as $event)
+                        <div class="swiper-slide" style="background-image: url('{{ $event->image_url }}');">
+                            <div class="mini-container">
+                                <div class="hero-continer">
+                                    <div class="hero-details">
+                                        <p class="Hero-text">{{ $event->title }}</p>
+                                        <div class="hero-time">
+                                            <p>{{ \Carbon\Carbon::parse($event->from)->format('d.m.Y') }}</p>
+                                            <p>{{ \Carbon\Carbon::parse($event->from)->format('H:i') }}h</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="swiper-slide" style="background-image: url('{{ asset('images/pic1.png') }}')">
-                        <div class="mini-container">
-                            <div class="hero-continer">
-                                <div class="hero-details">
-                                    <!-- Ovde ke treba od baza da se zeme Title-ot -->
-                                    <p class="Hero-text">Biggest brainster Party 2</p>
-
-                                    <div class="hero-time">
-                                        <!-- Ovde ke treba od baza da se zemat datumot i saatot -->
-                                        <p>01.03.2024</p>
-                                        <p>20:00h</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="mini-container">
-                            <div class="hero-continer">
-                                <div class="hero-details">
-                                    <!-- Ovde ke treba od baza da se zeme Title-ot -->
-                                    <p class="Hero-text">Biggest brainster Party3</p>
-
-                                    <div class="hero-time">
-                                        <!-- Ovde ke treba od baza da se zemat datumot i saatot -->
-                                        <p>01.03.2024</p>
-                                        <p>20:00h</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide" style="background-image: url('{{ asset('images/pic2.png') }}')">
-                        <div class="mini-container">
-                            <div class="hero-continer">
-                                <div class="hero-details">
-                                    <!-- Ovde ke treba od baza da se zeme Title-ot -->
-                                    <p class="Hero-text">Biggest brainster Party 4</p>
-
-                                    <div class="hero-time">
-                                        <!-- Ovde ke treba od baza da se zemat datumot i saatot -->
-                                        <p>01.03.2024</p>
-                                        <p>20:00h</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="mini-container">
-                            <div class="hero-continer">
-                                <div class="hero-details">
-                                    <!-- Ovde ke treba od baza da se zeme Title-ot -->
-                                    <p class="Hero-text">Biggest brainster Party5</p>
-
-                                    <div class="hero-time">
-                                        <!-- Ovde ke treba od baza da se zemat datumot i saatot -->
-                                        <p>01.03.2024</p>
-                                        <p>20:00h</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </section>
 
+
     <!-- Hero del 2, Toj so kartickite -->
-    <section id="Hero2">
+    {{-- <section id="Hero2">
         <div class="swiper-container2">
             <div class="swiper mySwiper2">
                 <div class="swiper-wrapper swiper-wrapper2">
@@ -297,7 +226,29 @@
                 </div>
             </div>
         </div>
+    </section> --}}
+    <section id="Hero2">
+        <div class="swiper-container2">
+            <div class="swiper mySwiper2">
+                <div class="swiper-wrapper swiper-wrapper2">
+                    @foreach($events as $event)
+                        <div class="swiper-slide swiper-slide2" onclick="mitre({{ $loop->index }})">
+                            <div class="custom-shape" style="background-image: url('{{ $event->image_url }}');">
+                                <div class="little_card">
+                                    <h1>{{ $event->title }}</h1>
+                                    <div class="little_info">
+                                        <p>{{ \Carbon\Carbon::parse($event->from)->format('d.m.Y') }}</p>
+                                        <p>{{ \Carbon\Carbon::parse($event->from)->format('H:i') }}h</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
     </section>
+
 
     <!-- Skriptite za da rabotat swipers -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
