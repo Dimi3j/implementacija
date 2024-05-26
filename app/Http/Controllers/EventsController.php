@@ -32,4 +32,11 @@ class EventsController extends Controller
         $events = Event::all();
         return view('welcome-page', compact('events'));
     }
+
+    public function allEvents()
+    {
+        $events = Event::all();
+
+        return view('all-events-dash', compact('events'));
+    }
 }

@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Brainster Next Implementacija</title>
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
     <link rel="stylesheet" href="{{ asset('css/swiper.css') }}">
     <link rel="stylesheet" href="{{ asset('css/kalendar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/kopce.css') }}">
 
+    {{-- Swiper --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    {{-- Fullcalendar --}}
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/index.global.min.js"></script>
 
     <script>
@@ -90,23 +90,34 @@
             </div>
 
             <div class="nav_links">
-                <button class="log_btn">Логирај се</button>
+                @if (Route::has('login'))
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class="log_btn">Dash</a>
+                    @else
+                        <button class="log_btn" onclick="window.location='{{ route('login') }}'">Логирај се</button>
 
-                <button class="reg_btn">Регистрација</button>
+                        @if (Route::has('register'))
+                            <button class="reg_btn" onclick="window.location='{{ route('register') }}'">Регистрација</button>
+                        @endif
+                    @endauth
+                @endif
 
                 <div class="dropdown">
                     <button>
                         <img src="{{ asset('./images/material-symbols-light_language.png') }}" alt="Image 1">
-
                     </button>
                     <div class="dropdown-content">
-                        <a href="#">Англиски</a> {{-- find a package that translates to english --}}
+                        <a href="#">Англиски</a>
                         <a href="#">Македонски</a>
                     </div>
                 </div>
             </div>
+
         </div>
     </nav>
+
+
+
 
     {{-- Hero --}}
     <section id="Hero">
