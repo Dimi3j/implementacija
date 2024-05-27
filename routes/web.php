@@ -18,11 +18,17 @@ require __DIR__.'/auth.php';
 
 
 // Admin panel for creating events
+Route::get('/dashboard/events/all', [EventsController::class, 'allEvents'])->name('events.all');
+
 Route::get('/dashboard/events/create', [EventsController::class, 'create'])->name('events.create');
 Route::post('/events', [EventsController::class, 'store'])->name('events.store');
 
 // UI view
-Route::get('/events-calendar', [EventsController::class, 'index'])->name('events.calendar');
+Route::get('/', [EventsController::class, 'index'])->name('events.calendar');
 
-// Breeze Login
-Route::get('/dashboard/events/all', [EventsController::class, 'allEvents'])->name('events.all');
+// Event edit admin panel
+Route::get('/events/{event}/edit', [EventsController::class, 'edit'])->name('events.edit');
+Route::put('/events/{event}', [EventsController::class, 'update'])->name('events.update');
+
+// new feature
+Route::resource('events', EventsController::class);
