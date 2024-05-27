@@ -5,10 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Brainster Next Implementacija</title>
-    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/swiper.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/kalendar.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/kopce.css') }}">
+    @vite(['resources/css/app.css', 'resources/css/index.css', 'resources/css/swiper.css', 'resources/css/kalendar.css', 'resources/css/kopce.css', 'resources/js/app.js'])
 
     {{-- Swiper --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -86,7 +83,7 @@
     <nav class="main_nav">
         <div class="nav_container">
             <div class="logo">
-                <img src="{{ asset('./images/brainster-learn-logo 2.png') }}" alt="Image 1">
+                <img src="{{ Vite::asset('resources/images/brainster-learn-logo 2.png') }}" alt="Image 1">
             </div>
 
             <div class="nav_links">
@@ -104,7 +101,7 @@
 
                 <div class="dropdown">
                     <button>
-                        <img src="{{ asset('./images/material-symbols-light_language.png') }}" alt="Image 1">
+                        <img src="{{ Vite::asset('resources/images/material-symbols-light_language.png') }}" alt="Image 1">
                     </button>
                     <div class="dropdown-content">
                         <a href="#">Англиски</a>
@@ -175,7 +172,7 @@
     <div class="vecer">
         <div class="vecer_container">
             <h1>Каде одиме вечер?</h1>
-            <img src="{{ asset('./images/krugcinja/vecer.png') }}" alt="">
+            <img src="{{ Vite::asset('resources/images/krugcinja/vecer.png') }}" alt="">
 
         </div>
     </div>
@@ -201,41 +198,41 @@
         <div class="first_part">
             <div class="footer_container">
                 <div class="left_circle">
-                    <img src="{{ asset('./images/krugcinja/footer_left.png') }}" alt="">
+                    <img src="{{ Vite::asset('resources/images/krugcinja/footer_left.png') }}" alt="">
 
                 </div>
 
                 <div class="media_logos">
-                    <img src="{{ asset('./images/brainster-learn-logo 2.png') }}" alt="">
+                    <img src="{{ Vite::asset('resources/images/brainster-learn-logo 2.png') }}" alt="">
 
 
                     <div class="logos">
                         <a href="https://www.facebook.com/brainster.co/">
-                            <img src="{{ asset('./images/logos_facebook.png') }}" alt="">
+                            <img src="{{ Vite::asset('resources/images/logos_facebook.png') }}" alt="">
 
                         </a>
 
                         <a href="https://www.instagram.com/brainsterco/">
-                            <img src="{{ asset('./images/Group.png') }}" alt="">
+                            <img src="{{ Vite::asset('resources/images/Group.png') }}" alt="">
                         </a>
 
                         <a href="https://www.linkedin.com/school/brainster-co/?originalSubdomain=mk">
-                            <img src="{{ asset('./images/devicon_linkedin.png') }}" alt="">
+                            <img src="{{ Vite::asset('resources/images/devicon_linkedin.png') }}" alt="">
 
                         </a>
                         <a href="https://www.tiktok.com/@brainsterco">
-                            <img src="{{ asset('./images/logos_tiktok-icon.png') }}" alt="">
+                            <img src="{{ Vite::asset('resources/images/logos_tiktok-icon.png') }}" alt="">
 
                         </a>
                         <a href="https://www.youtube.com/channel/UCNtVHccQMoj5VV8HM1jv_uw">
-                            <img src="{{ asset('./images/logos_youtube-icon.png') }}" alt="">
+                            <img src="{{ Vite::asset('resources/images/logos_youtube-icon.png') }}" alt="">
 
                         </a>
                     </div>
                 </div>
 
                 <div class="right_circle">
-                    <img src="{{ asset('./images/krugcinja/footer_right.png') }}" alt="">
+                    <img src="{{ Vite::asset('resources/images/krugcinja/footer_right.png') }}" alt="">
 
                 </div>
             </div>
@@ -276,6 +273,7 @@
         }
     </script>
 
+    {{-- @vite(['resources/js/index.js']) --}}
     <script src="{{ asset('./js/index.js') }}"></script>
 </body>
 
