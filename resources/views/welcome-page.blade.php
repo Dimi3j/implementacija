@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Brainster Next Implementacija</title>
-    @vite(['resources/css/app.css', 'resources/css/index.css', 'resources/css/swiper.css', 'resources/css/kalendar.css', 'resources/css/kopce.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/css/index.css', 'resources/css/swiper.css', 'resources/css/kalendar.css', 'resources/css/kopce.css', 'resources/js/app.js', 'resources/js/index.js'])
 
     {{-- Swiper --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -273,8 +273,29 @@
         }
     </script>
 
+    <script>
+        /* Za da mi presmeta koklu mi e visinata na navbar */
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const navbarHeight = document.querySelector('.navbar').offsetHeight;
+
+            document.documentElement.style.setProperty('--navbar-height', navbarHeight + 'px');
+        });
+
+        function popUp() {
+            document.getElementById("overlay").style.display = "block";
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function closePopUp() {
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("popup").style.display = "none";
+        }
+
+    </script>
+
     {{-- @vite(['resources/js/index.js']) --}}
-    <script src="{{ asset('./js/index.js') }}"></script>
+    {{-- <script src="{{ asset('./js/index.js') }}"></script> --}}
 </body>
 
 </html>
