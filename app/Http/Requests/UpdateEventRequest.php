@@ -23,14 +23,22 @@ class UpdateEventRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'ticket_price' => 'required|numeric|min:0',
+            'ticket_price' => 'nullable|numeric|min:0',
             'ticket_url' => 'nullable|url',
-            'from' => 'required|date',
+            'from' => 'required|date|after_or_equal:today',
             'to' => 'required|date|after_or_equal:from',
             'image_url' => 'nullable|url',
             'comment' => 'nullable|string',
             'contact' => 'nullable|string|email',
             'location' => 'nullable|string|max:255',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'from.after_or_equal' => 'The event start date must be today or later.',
+            'to.after_or_equal' => 'The event end date must be after or equal to the start date.',
         ];
     }
 }

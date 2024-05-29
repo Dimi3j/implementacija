@@ -15,7 +15,7 @@ class EventsSeeder extends Seeder
     {
         $events = [
             [
-                'user_id' => 1,
+                'company_id' => 1,
                 'type_id' => 1,
                 'city_id' => 1,
                 'title' => 'Rock Concert',
@@ -29,7 +29,7 @@ class EventsSeeder extends Seeder
                 'location' => 'Madison Square Garden',
             ],
             [
-                'user_id' => 2,
+                'company_id' => 2,
                 'type_id' => 2,
                 'city_id' => 2,
                 'title' => 'Tech Conference',
@@ -41,6 +41,20 @@ class EventsSeeder extends Seeder
                 'comment' => 'Join us for a day of tech talks and networking.',
                 'contact' => 'contact@techconf.com',
                 'location' => 'Los Angeles Convention Center',
+            ],
+            [
+                'company_id' => 3,
+                'type_id' => 3,
+                'city_id' => 3,
+                'title' => 'Social Media Workshop',
+                'ticket_price' => '150.00',
+                'ticket_url' => 'http://kupikartizase.com',
+                'from' => '2024-07-15 09:00:00',
+                'to' => '2024-07-15 17:00:00',
+                'image_url' => 'https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg',
+                'comment' => 'Come meet amazing influensers.',
+                'contact' => 'contact@instagram.com',
+                'location' => 'X headquarters',
             ],
         ];
 

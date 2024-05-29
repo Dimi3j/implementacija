@@ -5,77 +5,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Brainster Next Implementacija</title>
-    @vite(['resources/css/app.css', 'resources/css/index.css', 'resources/css/swiper.css', 'resources/css/kalendar.css', 'resources/css/kopce.css', 'resources/js/app.js', 'resources/js/index.js'])
+    @vite([ 'resources/css/app.css',
+            'resources/css/index.css',
+            'resources/css/kalendar.css',
+            'resources/css/kopce.css',
+            'resources/css/swiper.css',
+            'resources/css/swiper2.css',
+            'resources/js/app.js',
+            'resources/js/index.js',
+            'resources/fonts/poppins.css'])
 
     {{-- Swiper --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     {{-- Fullcalendar --}}
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/index.global.min.js"></script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var calendarEl = document.getElementById("calendar");
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: "dayGridMonth",
-                firstDay: 1,
-                weekNumberCalculation: "ISO",
-                timeZone: "Europe/Skopje",
-                height: "auto",
-                themeSystem: "bootstrap",
-                slotDuration: {
-                    days: 1
-                },
-                select: handleDateSelect.bind(this),
-                eventClick: handleDateClick.bind(this),
-                eventTimeFormat: {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    hour12: false,
-                },
-                dayHeaderContent: (args) => {
-                    const dayNames = [
-                        "НЕДЕЛА",
-                        "ПОНЕДЕЛНИК",
-                        "ВТОРНИК",
-                        "СРЕДА",
-                        "ЧЕТВРТОК",
-                        "ПЕТОК",
-                        "САБОТА",
-                    ];
-                    const dayName = dayNames[args.date.getUTCDay()];
-                    return dayName;
-                },
-                headerToolbar: {
-                    left: "prev",
-                    center: "title",
-                    right: "next",
-                },
-                events: [
-                    @foreach($events as $event)
-                    {
-                        title: "{{ $event->title }}",
-                        start: "{{ $event->from }}",
-                        className: "fc-event-{{ $event->user_id }}", // somehow do this $event->user_id->name OR a better solution put another row in the database for the event organizator
-                    },
-                    @endforeach
-                ],
-                eventContent: function(arg) {
-                    return {
-                        html: '<div class="fc-event-container">' + arg.event.title + "</div>",
-                    };
-                },
-                dateClick: function() {
-                    popUp();
-                },
-            });
-
-            function handleDateSelect(args) {}
-
-            function handleDateClick(args) {}
-            calendar.render();
-        });
-    </script>
 </head>
 
 <body>
@@ -94,14 +38,16 @@
                         <button class="log_btn" onclick="window.location='{{ route('login') }}'">Логирај се</button>
 
                         @if (Route::has('register'))
-                            <button class="reg_btn" onclick="window.location='{{ route('register') }}'">Регистрација</button>
+                            <button class="reg_btn"
+                                onclick="window.location='{{ route('register') }}'">Регистрација</button>
                         @endif
                     @endauth
                 @endif
 
                 <div class="dropdown">
                     <button>
-                        <img src="{{ Vite::asset('resources/images/material-symbols-light_language.png') }}" alt="Image 1">
+                        <img src="{{ Vite::asset('resources/images/material-symbols-light_language.png') }}"
+                            alt="Image 1">
                     </button>
                     <div class="dropdown-content">
                         <a href="#">Англиски</a>
@@ -113,15 +59,12 @@
         </div>
     </nav>
 
-
-
-
     {{-- Hero --}}
     <section id="Hero">
         <div class="swiper-container">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                    @foreach($events as $event)
+                    @foreach ($events as $event)
                         <div class="swiper-slide" style="background-image: url('{{ $event->image_url }}');">
                             <div class="mini-container">
                                 <div class="hero-continer">
@@ -141,13 +84,12 @@
         </div>
     </section>
 
-
     {{-- Hero del 2, Toj so kartickite --}}
     <section id="Hero2">
         <div class="swiper-container2">
             <div class="swiper mySwiper2">
                 <div class="swiper-wrapper swiper-wrapper2">
-                    @foreach($events as $event)
+                    @foreach ($events as $event)
                         <div class="swiper-slide swiper-slide2" onclick="mitre({{ $loop->index }})">
                             <div class="custom-shape" style="background-image: url('{{ $event->image_url }}');">
                                 <div class="little_card">
@@ -249,8 +191,9 @@
         </div>
     </footer>
 
-    {{-- Skriptite za da rabotat swipers --}}
+
     <script>
+    // Scripts for swiper
         var swiper = new Swiper(".mySwiper", {
             autoplay: {
                 delay: 2500,
@@ -271,17 +214,8 @@
         function mitre(id) {
             swiper.slideTo(id);
         }
-    </script>
 
-    <script>
-        /* Za da mi presmeta koklu mi e visinata na navbar */
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const navbarHeight = document.querySelector('.navbar').offsetHeight;
-
-            document.documentElement.style.setProperty('--navbar-height', navbarHeight + 'px');
-        });
-
+    // Scripts for calendar
         function popUp() {
             document.getElementById("overlay").style.display = "block";
             document.getElementById("popup").style.display = "block";
@@ -292,10 +226,68 @@
             document.getElementById("popup").style.display = "none";
         }
 
-    </script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var calendarEl = document.getElementById("calendar");
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: "dayGridMonth",
+                firstDay: 1,
+                weekNumberCalculation: "ISO",
+                timeZone: "Europe/Skopje",
+                height: "auto",
+                themeSystem: "bootstrap",
+                slotDuration: {
+                    days: 1
+                },
+                select: handleDateSelect.bind(this),
+                eventClick: handleDateClick.bind(this),
+                eventTimeFormat: {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false,
+                },
+                dayHeaderContent: (args) => {
+                    const dayNames = [
+                        "НЕДЕЛА",
+                        "ПОНЕДЕЛНИК",
+                        "ВТОРНИК",
+                        "СРЕДА",
+                        "ЧЕТВРТОК",
+                        "ПЕТОК",
+                        "САБОТА",
+                    ];
+                    const dayName = dayNames[args.date.getUTCDay()];
+                    return dayName;
+                },
+                headerToolbar: {
+                    left: "prev",
+                    center: "title",
+                    right: "next",
+                },
+                events: [
+                    @foreach ($events as $event)
+                        {
+                            title: "{{ $event->title }}",
+                            start: "{{ $event->from }}",
+                            className: "fc-event-{{ $event->user_id }}", // the event has a company_id 
+                        },
+                    @endforeach
+                ],
+                eventContent: function(arg) {
+                    return {
+                        html: '<div class="fc-event-container">' + arg.event.title + "</div>",
+                    };
+                },
+                dateClick: function() {
+                    popUp();
+                },
+            });
 
-    {{-- @vite(['resources/js/index.js']) --}}
-    {{-- <script src="{{ asset('./js/index.js') }}"></script> --}}
+            function handleDateSelect(args) {}
+
+            function handleDateClick(args) {}
+            calendar.render();
+        });
+    </script>
 </body>
 
 </html>

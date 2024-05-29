@@ -22,18 +22,26 @@ class StoreEventRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|exists:users,id',
+            'company_id' => 'required|exists:companies,id',
             'type_id' => 'required|exists:types,id',
             'city_id' => 'required|exists:cities,id',
             'title' => 'required|string|max:255',
             'ticket_price' => 'nullable|numeric',
             'ticket_url' => 'nullable|url',
-            'from' => 'required|date',
-            'to' => 'required|date',
+            'from' => 'required|date|after_or_equal:today',
+            'to' => 'required|date|after:from',
             'image_url' => 'required|url',
             'comment' => 'required|string|max:255',
             'contact' => 'required|string|max:255',
             'location' => 'required|string|max:255',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'from.after_or_equal' => 'The event start date must be today or later.',
+            'to.after' => 'The event end date must be after the start date.',
         ];
     }
 }

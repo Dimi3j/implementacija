@@ -203,7 +203,9 @@ footer{
 
 .line{
     width: 80%;
-    border-color: #525252
+    border-color: #525252;
+    margin-left: 150px;
+    /* this is a temporary fix */
 }
 
 /*---------END CREDITS------------*/

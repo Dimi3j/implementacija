@@ -28,17 +28,35 @@ class EventsController extends Controller
         return redirect()->route('events.create')->with('success', 'Event created successfully!');
     }
 
-    public function index() // For users
+    public function index(Request $request) // For users
     {
+        // Do the filtering!!!
+        // if ($request->has('filter')) {
+        //     $events = Event::where('company_name', $request->filter);
+        // } else {
+        //     $events = Event::all();
+        // }
         $events = Event::all();
+
+
         return view('welcome-page', compact('events'));
     }
 
-    public function allEvents() // For event org
+    public function allEvents()
     {
         $events = Event::all();
 
+        return view('dashboard', compact('events'));
+    }
+
+    public function ourEvents() // For event org
+    {
+        $company_id = auth()->user()->company_id;
+
+        $events = Event::where('company_id', $company_id)->get();
+
         return view('all-events-dash', compact('events'));
+
     }
 
     public function edit(Event $event) // Edit an existing event
@@ -46,7 +64,7 @@ class EventsController extends Controller
         return view('edit-event', compact('event'));
     }
 
-    public function update(UpdateEventRequest $request, Event $event) // Validate the edit and update to database
+    public function update(UpdateEventRequest $request, Event $event) // validate the edit and update to database
     {
         $validatedData = $request->validated();
 

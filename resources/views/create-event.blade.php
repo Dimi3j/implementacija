@@ -28,17 +28,8 @@
                     <form action="{{ route('events.store') }}" method="POST">
                         @csrf
 
-                        <div class="form-group">
-                            <label for="user_id">User</label>
-                            <select name="user_id" id="user_id" class="form-control">
-                                <option value="" disabled {{ old('user_id') ? '' : 'selected' }}>Select a user
-                                </option>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}"
-                                        {{ old('user_id') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        {{-- <input type="hidden" name="user_id" value="{{ auth()->user()->id }}"> --}}
+                        <input type="hidden" name="company_id" value="{{ auth()->user()->company_id }}">
 
                         <div class="form-group">
                             <label for="type_id">Type</label>
@@ -77,6 +68,7 @@
                             <input type="text" name="ticket_price" id="ticket_price" class="form-control"
                                 placeholder="50.00" value="{{ old('ticket_price') }}">
                         </div>
+
 
                         <div class="form-group">
                             <label for="ticket_url">Ticket URL</label>

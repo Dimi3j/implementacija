@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('All Events') }}
+            {{ __('My Events') }}
         </h2>
     </x-slot>
 
@@ -24,17 +24,24 @@
                                     <p class="text-gray-600 mb-2"><span class="font-semibold">City:</span>
                                         {{ $event->city->name }}</p>
                                     <p class="text-gray-600 mb-2"><span class="font-semibold">Ticket Price:</span>
-                                        ${{ number_format($event->ticket_price, 2) }}</p>
+                                        @if ($event->ticket_price)
+                                            ${{ number_format($event->ticket_price, 2) }}
+                                        @else
+                                            Free
+                                        @endif
+                                    </p>
                                     <p class="text-gray-600 mb-4">{{ $event->description }}</p>
                                     <div class="flex space-x-4">
                                         <a href="{{ route('events.edit', $event->id) }}"
                                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                             Edit
                                         </a>
-                                        <form action="{{ route('events.destroy', $event->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this event?');">
+                                        <form action="{{ route('events.destroy', $event->id) }}" method="POST"
+                                            onsubmit="return confirm('Are you sure you want to delete this event?');">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                            <button type="submit"
+                                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                                 Delete
                                             </button>
                                         </form>
