@@ -153,7 +153,7 @@ body{
     color:var(--Font-colors);
     display: flex;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 32px;
 }
 
 .vecer_container img{
@@ -201,10 +201,19 @@ footer{
 
 /*----------------Line------------*/
 
-.line{
-    width: 80%;
-    border-color: #525252
+.cvetan_e_retard{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.line{
+    width: 90%; /* if you want centered with the calendar do 80% */
+    border-color: #525252;
+    margin-bottom: 12px;
+}
+
 
 /*---------END CREDITS------------*/
 

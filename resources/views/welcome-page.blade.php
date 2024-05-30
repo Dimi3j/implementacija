@@ -136,7 +136,7 @@
             <div>
                 <img id="picture" src="{{ Vite::asset('resources/images/pic1.png') }}" alt="Image Toni Zen">
                 <div id="mid-popup" class="flex flex-col items-center bg-[#121212] h-[270px]">
-                    <span class="text-white text-xl p-5">{{ $event->name}} @Labaratorium</span>
+                    <span class="text-white text-xl p-5">{{ $event->tittle }} {{ $event->location }}</span>
                     <div class="flex gap-2">
                         <div>
                             <span class="text-white flex">Време: </span>
@@ -158,8 +158,7 @@
                 </div>
 
                 <div id="location">
-                    <p>ovde da se naprai lokacijata</p>
-                </div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2965.208370871187!2d21.489269186523444!3d41.995803443803865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13543f007e5ba151%3A0x7b55ead34c3a9378!2sKozara%20dooel!5e0!3m2!1sen!2smk!4v1717097913831!5m2!1sen!2smk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                </div>
 
             </div>
         </div>
@@ -210,11 +209,13 @@
             </div>
         </div>
 
-        <hr class="line" />
+        <div class="cvetan_e_retard">
+            <hr class="line" />
+        </div>
 
         <div class="end_credits">
             <div class="end_container">
-                <span>@ Brainster 2024.Designed with love</span>
+                <span>@ Brainster 2024. Designed with love</span>
                 <span>Do you like to read long legal texts?
                     <a class="end_credits_A" href="#">Privacy policy</a></span>
             </div>
