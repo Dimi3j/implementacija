@@ -165,6 +165,12 @@
     scrollbar-width: thin;
   }
 
+  #picture {
+    width: 871px;
+    height: 369px;
+  }
+
+
 
 /* Popup container */
 #popup {
@@ -174,8 +180,8 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
-    max-width: 600px;
+    width: 871px;
+    height: 843px;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);

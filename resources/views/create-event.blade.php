@@ -27,8 +27,7 @@
 
                     <form action="{{ route('events.store') }}" method="POST">
                         @csrf
-
-                        {{-- <input type="hidden" name="user_id" value="{{ auth()->user()->id }}"> --}}
+                        
                         <input type="hidden" name="company_id" value="{{ auth()->user()->company_id }}">
 
                         <div class="form-group">

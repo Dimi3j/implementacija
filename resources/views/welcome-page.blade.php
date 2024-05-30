@@ -128,11 +128,41 @@
 
     {{-- Kopce --}}
 
-    <div id="overlay" class="overlay"></div>
+    <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-10" onclick="closePopUp()"></div>
 
-    <div id="popup" class="popup">
-        <span class="close" onclick="closePopUp()">&times;</span>
-        <p>This is the popup content.</p>
+    <div id="popup" class="popup fixed inset-0 flex items-center justify-center z-20">
+        <div class="bg-white rounded-lg shadow-lg relative">
+            <span class="close absolute top-10 right-10 text-gray-600 cursor-pointer text-xl" onclick="closePopUp()">X</span>
+            <div>
+                <img id="picture" src="{{ Vite::asset('resources/images/pic1.png') }}" alt="Image Toni Zen">
+                <div id="mid-popup" class="flex flex-col items-center bg-[#121212] h-[270px]">
+                    <span class="text-white text-xl p-5">{{ $event->name}} @Labaratorium</span>
+                    <div class="flex gap-2">
+                        <div>
+                            <span class="text-white flex">Време: </span>
+                            <span class="text-white flex">Место: </span>
+                            <span class="text-white flex">Цена: </span>
+                            <span class="text-white flex">Контакт: </span>
+                            <span class="text-white flex">Промоција: </span>
+                            <span class="text-white flex">Линк до карти: </span>
+                        </div>
+                        <div>
+                            <span class="text-white flex">{{ \Carbon\Carbon::parse($event->from)->format('H:i') }}</span>
+                            <span class="text-white flex">{{ $event->location }}</span>
+                            <span class="text-white flex">{{ $event->ticket_price }} ден</span>
+                            <span class="text-white flex">{{ $event->contact }}</span>
+                            <span class="text-white flex">{{ $event->comment}}</span>
+                            <span class="text-white flex">{{ $event->ticket_url}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="location">
+                    <p>ovde da se naprai lokacijata</p>
+                </div>
+
+            </div>
+        </div>
     </div>
 
     {{-- Footer --}}
@@ -268,7 +298,7 @@
                         {
                             title: "{{ $event->title }}",
                             start: "{{ $event->from }}",
-                            className: "fc-event-{{ $event->user_id }}", // the event has a company_id 
+                            className: "fc-event-{{ $event->user_id }}", // the event has a company_id
                         },
                     @endforeach
                 ],
