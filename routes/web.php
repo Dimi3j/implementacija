@@ -37,3 +37,6 @@ require __DIR__.'/auth.php';
 // UI view
 Route::get('/', [EventsController::class, 'index'])->name('events.calendar');
 
+Route::get('/event-filter', function () {
+    return view('event-filter');
+});

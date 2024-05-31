@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Brainster Next Implementacija</title>
     @vite([ 'resources/css/app.css',
+            'resources/css/fillter.css',
             'resources/css/index.css',
             'resources/css/kalendar.css',
             'resources/css/kopce.css',
@@ -118,6 +119,37 @@
 
         </div>
     </div>
+
+    <div class="filter-wrapper">
+        <div class="filter-container">
+            <div class="splitter">
+            <button class="sve">Сите настани</button>
+            <div class="dropdown">
+                <button class="dropbtn">Град</button>
+                <div class="dropdown-content">
+                    <a href="#">City 1</a>
+                    <a href="#">City 2</a>
+                    <a href="#">City 3</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Локал?</button>
+                <div class="dropdown-content">
+                    <a href="#">Venue 1</a>
+                    <a href="#">Venue 2</a>
+                    <a href="#">Venue 3</a>
+                </div>
+            </div>
+            <button class="filter-button">BRAINSTER</button>
+            <button class="filter-button">МОБ</button>
+            <button class="filter-button">Лабораториум</button>
+            </div>
+            <div>
+            <input type="text" class="search-input" placeholder="search">
+            </div>
+            </div>
+    </div>
+
 
     {{-- Kalendarot kade treba da ide --}}
     <section class="calendar-container">
