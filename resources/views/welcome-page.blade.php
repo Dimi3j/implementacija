@@ -5,16 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Brainster Next Implementacija</title>
-    @vite([ 'resources/css/app.css',
-            'resources/css/fillter.css',
-            'resources/css/index.css',
-            'resources/css/kalendar.css',
-            'resources/css/kopce.css',
-            'resources/css/swiper.css',
-            'resources/css/swiper2.css',
-            'resources/js/app.js',
-            'resources/js/index.js',
-            'resources/fonts/poppins.css'])
+    @vite(['resources/css/app.css', 'resources/css/fillter.css', 'resources/css/index.css', 'resources/css/kalendar.css', 'resources/css/kopce.css', 'resources/css/swiper.css', 'resources/css/swiper2.css', 'resources/js/app.js', 'resources/js/index.js', 'resources/fonts/poppins.css'])
 
     {{-- Swiper --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -120,35 +111,58 @@
         </div>
     </div>
 
+    {{-- <div class="filter-wrapper">
+        <div class="filter-container">
+            <div class="splitter">
+                <button class="sve">Сите настани</button>
+                <div class="dropdown">
+                    <button class="dropbtn">Град</button>
+                    <div class="dropdown-content">
+                        @foreach ($cities as $city)
+                            <a href="#">{{ $city->name }}</a>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Локал?</button>
+                    <div class="dropdown-content">
+                        <a href="#">Venue 1</a>
+                        <a href="#">Venue 2</a>
+                        <a href="#">Venue 3</a>
+                    </div>
+                </div>
+                <button class="filter-button">BRAINSTER</button>
+                <button class="filter-button">МОБ</button>
+                <button class="filter-button">Лабораториум</button>
+            </div>
+            <div>
+                <input type="text" class="search-input" placeholder="search">
+            </div>
+        </div>
+    </div> --}}
+
     <div class="filter-wrapper">
         <div class="filter-container">
             <div class="splitter">
-            <button class="sve">Сите настани</button>
-            <div class="dropdown">
-                <button class="dropbtn">Град</button>
-                <div class="dropdown-content">
-                    <a href="#">City 1</a>
-                    <a href="#">City 2</a>
-                    <a href="#">City 3</a>
+                <button class="sve">Сите настани</button>
+                <div class="dropdown">
+                    <button class="dropbtn">Град</button>
+                    <div class="dropdown-content">
+                        @foreach ($cities as $city)
+                            <a href="#">{{ $city->name }}</a>
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-            <div class="dropdown">
-                <button class="dropbtn">Локал?</button>
-                <div class="dropdown-content">
-                    <a href="#">Venue 1</a>
-                    <a href="#">Venue 2</a>
-                    <a href="#">Venue 3</a>
-                </div>
-            </div>
-            <button class="filter-button">BRAINSTER</button>
-            <button class="filter-button">МОБ</button>
-            <button class="filter-button">Лабораториум</button>
+                @foreach ($premiumCompanies as $company)
+                    <a href="?filter={{ $company->company_name }}" class="filter-button">{{ $company->company_name }}</a>
+                @endforeach
             </div>
             <div>
-            <input type="text" class="search-input" placeholder="search">
+                <input type="text" class="search-input" placeholder="search">
             </div>
-            </div>
+        </div>
     </div>
+
 
 
     {{-- Kalendarot kade treba da ide --}}
@@ -164,11 +178,12 @@
 
     <div id="popup" class="popup fixed inset-0 flex items-center justify-center z-20">
         <div class="bg-white rounded-lg shadow-lg relative">
-            <span class="close absolute top-10 right-10 text-gray-600 cursor-pointer text-xl" onclick="closePopUp()">X</span>
+            <span class="close absolute top-10 right-10 text-gray-600 cursor-pointer text-xl"
+                onclick="closePopUp()">X</span>
             <div>
                 <img id="picture" src="{{ Vite::asset('resources/images/pic1.png') }}" alt="Image Toni Zen">
                 <div id="mid-popup" class="flex flex-col items-center bg-[#121212] h-[270px]">
-                    <span class="text-white text-xl p-5">{{ $event->tittle }} {{ $event->location }}</span>
+                    <span class="text-white text-xl p-5">{{ $event->title }} {{ $event->location }}</span>
                     <div class="flex gap-2">
                         <div>
                             <span class="text-white flex">Време: </span>
@@ -179,18 +194,23 @@
                             <span class="text-white flex">Линк до карти: </span>
                         </div>
                         <div>
-                            <span class="text-white flex">{{ \Carbon\Carbon::parse($event->from)->format('H:i') }}</span>
+                            <span
+                                class="text-white flex">{{ \Carbon\Carbon::parse($event->from)->format('H:i') }}</span>
                             <span class="text-white flex">{{ $event->location }}</span>
                             <span class="text-white flex">{{ $event->ticket_price }} ден</span>
                             <span class="text-white flex">{{ $event->contact }}</span>
-                            <span class="text-white flex">{{ $event->comment}}</span>
-                            <span class="text-white flex">{{ $event->ticket_url}}</span>
+                            <span class="text-white flex">{{ $event->comment }}</span>
+                            <span class="text-white flex">{{ $event->ticket_url }}</span>
                         </div>
                     </div>
                 </div>
 
                 <div id="location">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2965.208370871187!2d21.489269186523444!3d41.995803443803865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13543f007e5ba151%3A0x7b55ead34c3a9378!2sKozara%20dooel!5e0!3m2!1sen!2smk!4v1717097913831!5m2!1sen!2smk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                </div>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2965.208370871187!2d21.489269186523444!3d41.995803443803865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13543f007e5ba151%3A0x7b55ead34c3a9378!2sKozara%20dooel!5e0!3m2!1sen!2smk!4v1717097913831!5m2!1sen!2smk"
+                        width="871" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
 
             </div>
         </div>
@@ -256,7 +276,7 @@
 
 
     <script>
-    // Scripts for swiper
+        // Scripts for swiper
         var swiper = new Swiper(".mySwiper", {
             autoplay: {
                 delay: 2500,
@@ -278,7 +298,7 @@
             swiper.slideTo(id);
         }
 
-    // Scripts for calendar
+        // Scripts for calendar
         function popUp() {
             document.getElementById("overlay").style.display = "block";
             document.getElementById("popup").style.display = "block";
@@ -331,7 +351,7 @@
                         {
                             title: "{{ $event->title }}",
                             start: "{{ $event->from }}",
-                            className: "fc-event-{{ $event->user_id }}", // the event has a company_id
+                            className: "fc-event-{{ $event->company_id }}",
                         },
                     @endforeach
                 ],

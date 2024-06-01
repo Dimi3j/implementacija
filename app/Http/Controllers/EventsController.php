@@ -9,6 +9,7 @@ use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
+use App\Models\Company;
 
 class EventsController extends Controller
 {
@@ -28,18 +29,19 @@ class EventsController extends Controller
         return redirect()->route('events.create')->with('success', 'Event created successfully!');
     }
 
-    public function index(Request $request) // For users
-    {
         // Do the filtering!!!
         // if ($request->has('filter')) {
         //     $events = Event::where('company_name', $request->filter);
         // } else {
         //     $events = Event::all();
         // }
+    public function index() // For users
+    {
+        $cities = City::all();
         $events = Event::all();
+        $premiumCompanies = Company::where('premium', true)->get();
 
-
-        return view('welcome-page', compact('events'));
+        return view('welcome-page', compact('events', 'cities', 'premiumCompanies'));
     }
 
     public function allEvents()
