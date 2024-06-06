@@ -163,8 +163,6 @@
         </div>
     </div>
 
-
-
     {{-- Kalendarot kade treba da ide --}}
     <section class="calendar-container">
         <div class="calendar-wrapper">
@@ -173,7 +171,6 @@
     </section>
 
     {{-- Kopce --}}
-
     <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-10" onclick="closePopUp()"></div>
 
     <div id="popup" class="popup fixed inset-0 flex items-center justify-center z-20">
