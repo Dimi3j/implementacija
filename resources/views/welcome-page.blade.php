@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Brainster Next Implementacija</title>
-    @vite(['resources/css/app.css', 'resources/css/fillter.css', 'resources/css/index.css', 'resources/css/kalendar.css', 'resources/css/kopce.css', 'resources/css/swiper.css', 'resources/css/swiper2.css', 'resources/js/app.js', 'resources/js/index.js', 'resources/fonts/poppins.css'])
+    @vite(['resources/css/app.css', 'resources/css/fillter.css', 'resources/css/index.css', 'resources/css/kalendar.css', 'resources/css/kopce.css', 'resources/css/swiper.css', 'resources/css/swiper2.css', 'resources/js/app.js', 'resources/js/index.js', 'resources/css/popup1.css', 'resources/fonts/poppins.css'])
 
     {{-- Swiper --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -177,22 +177,58 @@
     <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-10" onclick="closePopUp()"></div>
 
    <div id="cel-Popup1">
-        <div id="popup" class="popup">
-            <swiper-container class="Swiper3" scrollbar-hide="false" grab-cursor="true" direction="vertical"
-        space-between="30" mousewheel="true">
-        <swiper-slide>Slide 1</swiper-slide>
-        <swiper-slide>Slide 2</swiper-slide>
-        <swiper-slide>Slide 3</swiper-slide>
-        <swiper-slide>Slide 4</swiper-slide>
-        <swiper-slide>Slide 5</swiper-slide>
-        <swiper-slide>Slide 6</swiper-slide>
-        <swiper-slide>Slide 7</swiper-slide>
-        <swiper-slide>Slide 8</swiper-slide>
-        <swiper-slide>Slide 9</swiper-slide>
-    </swiper-container>
+        <div id="popup">
+            <div class="full-container">
+                <div class="scrollable-content">
+                    <div class="event-card"  style="background-color: #E5A648;">
+                        <img src="https://via.placeholder.com/379x88" alt="Event Image">
+                        <div class="items-card">
+                            <div class="left-items-card">
+                                <p>22:30</p>
+                                <p>150ден</p>
+                                <p>+38970126456</p>
+                            </div>
+                            <div class="right-items-card">
+                                <p>Toni Zen @Laboratorium</p>
+                                <p>Скопје</p>
+                                <p>-50% drinks</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <img src="https://via.placeholder.com/379x88" alt="Event Image">
+                        <div class="items-card">
+                            <div class="left-items-card">
+                                <p>23:00</p>
+                                <p>200ден</p>
+                                <p>+38970126456</p>
+                            </div>
+                            <div class="right-items-card">
+                                <p>Another Event @place</p>
+                                <p>Скопје</p>
+                                <p>-30% drinks</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-card">
+                        <img src="https://via.placeholder.com/379x88" alt="Event Image">
+                        <div class="items-card">
+                            <div class="left-items-card">
+                                <p>22:30</p>
+                                <p>250ден</p>
+                                <p>+38970126456</p>
+                            </div>
+                            <div class="right-items-card">
+                                <p>Party @place</p>
+                                <p>Скопје</p>
+                                <p>-20% on Jack Daniels</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
    </div>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 
 
     {{-- KOPCE-2 - DA SE DOPRAI TREBA --}}
