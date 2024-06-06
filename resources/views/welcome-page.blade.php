@@ -172,10 +172,33 @@
         </div>
     </section>
 
-    {{-- Kopce --}}
+
+    {{-- KOPCE-1 --}}
 
     <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-10" onclick="closePopUp()"></div>
 
+   <div id="cel-Popup1">
+        <div id="popup" class="popup">
+            <swiper-container class="Swiper3" scrollbar-hide="false" grab-cursor="true" direction="vertical"
+        space-between="30" mousewheel="true">
+        <swiper-slide>Slide 1</swiper-slide>
+        <swiper-slide>Slide 2</swiper-slide>
+        <swiper-slide>Slide 3</swiper-slide>
+        <swiper-slide>Slide 4</swiper-slide>
+        <swiper-slide>Slide 5</swiper-slide>
+        <swiper-slide>Slide 6</swiper-slide>
+        <swiper-slide>Slide 7</swiper-slide>
+        <swiper-slide>Slide 8</swiper-slide>
+        <swiper-slide>Slide 9</swiper-slide>
+    </swiper-container>
+        </div>
+   </div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+
+
+    {{-- KOPCE-2 - DA SE DOPRAI TREBA --}}
+
+{{--
     <div id="popup" class="popup fixed inset-0 flex items-center justify-center z-20">
         <div class="bg-white rounded-lg shadow-lg relative">
             <span class="close absolute top-10 right-10 text-gray-600 cursor-pointer text-xl"
@@ -214,7 +237,29 @@
 
             </div>
         </div>
-    </div>
+    </div> --}}
+
+
+
+    {{-- SCRIPT FOR POPUP --}}
+
+    <script>
+
+             function popUp() {
+            document.getElementById("overlay").style.display = "block";
+            document.getElementById("popup").style.display = "block";
+        }
+
+        function closePopUp() {
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("popup").style.display = "none";
+        }
+
+    </script>
+
+
+
+
 
     {{-- Footer --}}
     <footer>
@@ -299,15 +344,15 @@
         }
 
         // Scripts for calendar
-        function popUp() {
-            document.getElementById("overlay").style.display = "block";
-            document.getElementById("popup").style.display = "block";
-        }
+        // function popUp() {
+        //     document.getElementById("overlay").style.display = "block";
+        //     document.getElementById("popup").style.display = "block";
+        // }
 
-        function closePopUp() {
-            document.getElementById("overlay").style.display = "none";
-            document.getElementById("popup").style.display = "none";
-        }
+        // function closePopUp() {
+        //     document.getElementById("overlay").style.display = "none";
+        //     document.getElementById("popup").style.display = "none";
+        // }
 
         document.addEventListener("DOMContentLoaded", function() {
             var calendarEl = document.getElementById("calendar");
