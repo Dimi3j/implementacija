@@ -281,6 +281,9 @@
     <script>
 
              function popUp() {
+                //da proverite dali da se pokaze modal ili ne
+                // vo modalot da se namestat samo eventite od izbraniot den
+
             document.getElementById("overlay").style.display = "block";
             document.getElementById("popup").style.display = "block";
         }
@@ -441,13 +444,19 @@
                     };
                 },
                 dateClick: function() {
-                    popUp();
+                    ////
+                    ///
+
+                        popUp();
+
                 },
             });
 
             function handleDateSelect(args) {}
 
-            function handleDateClick(args) {}
+            function handleDateClick(args) {
+                popUp();
+            }
             calendar.render();
         });
     </script>
