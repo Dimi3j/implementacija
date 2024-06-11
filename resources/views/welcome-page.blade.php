@@ -7,14 +7,21 @@
     <title>Brainster Next Implementacija</title>
     @vite(['resources/css/app.css', 'resources/css/fillter.css', 'resources/css/index.css', 'resources/css/kalendar.css', 'resources/css/kopce.css', 'resources/css/swiper.css', 'resources/css/swiper2.css', 'resources/js/app.js', 'resources/js/index.js', 'resources/css/popup1.css', 'resources/fonts/poppins.css'])
 
+
+
     {{-- Swiper --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
+    {{-- FontAwesome --}}
+    <script src="https://kit.fontawesome.com/c406aee417.js" crossorigin="anonymous"></script>
+
     {{-- Fullcalendar --}}
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.13/index.global.min.js"></script>
+
 </head>
 
 <body>
+
     {{-- Navbar --}}
     <nav class="main_nav">
         <div class="nav_container">
@@ -25,7 +32,7 @@
             <div class="nav_links">
                 @if (Route::has('login'))
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="log_btn">Dash</a>
+                        <a href="{{ url('/dashboard') }}" class="log_btn">Панел</a>
                     @else
                         <button class="log_btn" onclick="window.location='{{ route('login') }}'">Логирај се</button>
 
@@ -42,8 +49,9 @@
                             alt="Image 1">
                     </button>
                     <div class="dropdown-content">
-                        <a href="#">Англиски</a>
-                        <a href="#">Македонски</a>
+                        {{-- <a href="#">Англиски</a>
+                        <a href="#">Македонски</a> --}}
+                        <a href="#">Comming soon...</a>
                     </div>
                 </div>
             </div>
@@ -56,15 +64,15 @@
         <div class="swiper-container">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                    @foreach ($events as $event)
-                        <div class="swiper-slide" style="background-image: url('{{ $event->image_url }}');">
+                    @foreach ($swipers->sortBy('from')->take(5) as $swipe)
+                        <div class="swiper-slide" style="background-image: url('{{ $swipe->image_url }}');">
                             <div class="mini-container">
-                                <div class="hero-continer">
+                                <div class="hero-container">
                                     <div class="hero-details">
-                                        <p class="Hero-text">{{ $event->title }}</p>
+                                        <p class="Hero-text">{{ $swipe->title }}</p>
                                         <div class="hero-time">
-                                            <p>{{ \Carbon\Carbon::parse($event->from)->format('d.m.Y') }}</p>
-                                            <p>{{ \Carbon\Carbon::parse($event->from)->format('H:i') }}h</p>
+                                            <p>{{ \Carbon\Carbon::parse($swipe->from)->format('d.m.Y') }}</p>
+                                            <p>{{ \Carbon\Carbon::parse($swipe->from)->format('H:i') }}h</p>
                                         </div>
                                     </div>
                                 </div>
@@ -76,19 +84,19 @@
         </div>
     </section>
 
-    {{-- Hero del 2, Toj so kartickite --}}
+    {{-- Hero 2 --}}
     <section id="Hero2">
         <div class="swiper-container2">
             <div class="swiper mySwiper2">
                 <div class="swiper-wrapper swiper-wrapper2">
-                    @foreach ($events as $event)
+                    @foreach ($swipers->sortBy('from')->take(5) as $swipe)
                         <div class="swiper-slide swiper-slide2" onclick="mitre({{ $loop->index }})">
-                            <div class="custom-shape" style="background-image: url('{{ $event->image_url }}');">
+                            <div class="custom-shape" style="background-image: url('{{ $swipe->image_url }}');">
                                 <div class="little_card">
-                                    <h1>{{ $event->title }}</h1>
+                                    <h1>{{ $swipe->title }}</h1>
                                     <div class="little_info">
-                                        <p>{{ \Carbon\Carbon::parse($event->from)->format('d.m.Y') }}</p>
-                                        <p>{{ \Carbon\Carbon::parse($event->from)->format('H:i') }}h</p>
+                                        <p>{{ \Carbon\Carbon::parse($swipe->from)->format('d.m.Y') }}</p>
+                                        <p>{{ \Carbon\Carbon::parse($swipe->from)->format('H:i') }}h</p>
                                     </div>
                                 </div>
                             </div>
@@ -98,7 +106,6 @@
             </div>
         </div>
     </section>
-
 
     {{-- Skriptite za da rabotat swipers --}}
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -111,57 +118,40 @@
         </div>
     </div>
 
-    {{-- <div class="filter-wrapper">
-        <div class="filter-container">
-            <div class="splitter">
-                <button class="sve">Сите настани</button>
-                <div class="dropdown">
-                    <button class="dropbtn">Град</button>
-                    <div class="dropdown-content">
-                        @foreach ($cities as $city)
-                            <a href="#">{{ $city->name }}</a>
-                        @endforeach
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="dropbtn">Локал?</button>
-                    <div class="dropdown-content">
-                        <a href="#">Venue 1</a>
-                        <a href="#">Venue 2</a>
-                        <a href="#">Venue 3</a>
-                    </div>
-                </div>
-                <button class="filter-button">BRAINSTER</button>
-                <button class="filter-button">МОБ</button>
-                <button class="filter-button">Лабораториум</button>
-            </div>
-            <div>
-                <input type="text" class="search-input" placeholder="search">
-            </div>
-        </div>
-    </div> --}}
-
+    {{-- Fillteri --}}
     <div class="filter-wrapper">
         <div class="filter-container">
             <div class="splitter">
-                <button class="sve">Сите настани</button>
+                <a href="?filter=all" class="sve">Сите настани <i class="fa-solid fa-arrow-down-long"></i></a>
                 <div class="dropdown">
-                    <button class="dropbtn">Град</button>
+                    <button class="dropbtn">Град <i class="fa-solid fa-arrow-down-long"></i></button>
                     <div class="dropdown-content">
                         @foreach ($cities as $city)
-                            <a href="#">{{ $city->name }}</a>
+                            <a href="?city={{ $city->id }}&{{ http_build_query(request()->except('city')) }}">{{ $city->name }}</a>
                         @endforeach
                     </div>
                 </div>
                 @foreach ($premiumCompanies as $company)
-                    <a href="?filter={{ $company->company_name }}" class="filter-button">{{ $company->company_name }}</a>
+                    <a href="?filter={{ $company->id }}&{{ http_build_query(request()->except('filter')) }}" class="filter-button">{{ $company->company_name }}</a>
                 @endforeach
             </div>
-            <div>
-                <input type="text" class="search-input" placeholder="search">
+            <div class="search-container">
+                <form method="GET" action="{{ url()->current() }}" class="search-form">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" name="search" class="search-input" placeholder="search" value="{{ request('search') }}">
+                    <button type="submit" style="display: none;">Search</button>
+
+                    @if (request('filter') && request('filter') != 'all')
+                        <input type="hidden" name="filter" value="{{ request('filter') }}">
+                    @endif
+                    @if (request('city'))
+                        <input type="hidden" name="city" value="{{ request('city') }}">
+                    @endif
+                </form>
             </div>
         </div>
     </div>
+
 
     {{-- Kalendarot kade treba da ide --}}
     <section class="calendar-container">
@@ -176,72 +166,71 @@
 
     <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-10" onclick="closePopUp()"></div>
 
-   <div id="cel-Popup1">
+    <div id="cel-Popup1">
         <div id="popup">
             <div class="full-container">
                 <div class="scrollable-content">
-                    <div class="event-card"  style="background-color: #E5A648;">
-                        <img src="https://via.placeholder.com/379x88" alt="Event Image">
+                    <div class="event-card" style="background-color: #E5A648;">
+                        <img src="{{ $swipe->image_url }}" alt="Event Image">
                         <div class="items-card">
                             <div class="left-items-card">
-                                <p>22:30</p>
-                                <p>150ден</p>
-                                <p>+38970126456</p>
+                                <p>{{ \Carbon\Carbon::parse($swipe->from)->format('H:i') }}</p>
+                                <p>{{ $swipe->ticket_price }}</p>
+                                <p>{{ $swipe->contact }}</p>
                             </div>
                             <div class="right-items-card">
-                                <p>Toni Zen @Laboratorium</p>
-                                <p>Скопје</p>
-                                <p>-50% drinks</p>
+                                <p>{{ $swipe->title}}</p>
+                                <p>{{ $cities->get($swipe->city_id)->name }}</p>
+                                <p>{{ $swipe->comment }}</p>
                             </div>
                         </div>
                     </div>
                     <div class="event-card">
-                        <img src="https://via.placeholder.com/379x88" alt="Event Image">
+                        <img src="{{ $swipe->image_url }}" alt="Event Image">
                         <div class="items-card">
                             <div class="left-items-card">
-                                <p>23:00</p>
-                                <p>200ден</p>
-                                <p>+38970126456</p>
+                                <p>{{ \Carbon\Carbon::parse($swipe->from)->format('H:i') }}</p>
+                                <p>{{ $swipe->ticket_price }}</p>
+                                <p>{{ $swipe->contact }}</p>
                             </div>
                             <div class="right-items-card">
-                                <p>Another Event @place</p>
-                                <p>Скопје</p>
-                                <p>-30% drinks</p>
+                                <p>{{ $swipe->title}}</p>
+                                <p>{{ $cities->get($swipe->city_id)->name }}</p>
+                                <p>{{ $swipe->comment }}</p>
                             </div>
                         </div>
                     </div>
                     <div class="event-card">
-                        <img src="https://via.placeholder.com/379x88" alt="Event Image">
+                        <img src="{{ $swipe->image_url }}" alt="Event Image">
                         <div class="items-card">
                             <div class="left-items-card">
-                                <p>22:30</p>
-                                <p>250ден</p>
-                                <p>+38970126456</p>
+                                <p>{{ \Carbon\Carbon::parse($swipe->from)->format('H:i') }}</p>
+                                <p>{{ $swipe->ticket_price }}</p>
+                                <p>{{ $swipe->contact }}</p>
                             </div>
                             <div class="right-items-card">
-                                <p>Party @place</p>
-                                <p>Скопје</p>
-                                <p>-20% on Jack Daniels</p>
+                                <p>{{ $swipe->title}}</p>
+                                <p>{{ $cities->get($swipe->city_id)->name }}</p>
+                                <p>{{ $swipe->comment }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-   </div>
+    </div>
 
 
     {{-- KOPCE-2 - DA SE DOPRAI TREBA --}}
 
-{{--
-    <div id="popup" class="popup fixed inset-0 flex items-center justify-center z-20">
+    {{-- <div id="popup" class="popup fixed inset-0 flex items-center justify-center z-20">
         <div class="bg-white rounded-lg shadow-lg relative">
             <span class="close absolute top-10 right-10 text-gray-600 cursor-pointer text-xl"
                 onclick="closePopUp()">X</span>
             <div>
                 <img id="picture" src="{{ Vite::asset('resources/images/pic1.png') }}" alt="Image Toni Zen">
                 <div id="mid-popup" class="flex flex-col items-center bg-[#121212] h-[270px]">
-                    <span class="text-white text-xl p-5">{{ $event->title }} {{ $event->location }}</span>
+                    <span class="text-white text-xl p-5">{{ $swipe->title }} {{ $swipe->location }}</span>
                     <div class="flex gap-2">
                         <div>
                             <span class="text-white flex">Време: </span>
@@ -253,12 +242,12 @@
                         </div>
                         <div>
                             <span
-                                class="text-white flex">{{ \Carbon\Carbon::parse($event->from)->format('H:i') }}</span>
-                            <span class="text-white flex">{{ $event->location }}</span>
-                            <span class="text-white flex">{{ $event->ticket_price }} ден</span>
-                            <span class="text-white flex">{{ $event->contact }}</span>
-                            <span class="text-white flex">{{ $event->comment }}</span>
-                            <span class="text-white flex">{{ $event->ticket_url }}</span>
+                                class="text-white flex">{{ \Carbon\Carbon::parse($swipe->from)->format('H:i') }}</span>
+                            <span class="text-white flex">{{ $swipe->location }}</span>
+                            <span class="text-white flex">{{ $swipe->ticket_price }} ден</span>
+                            <span class="text-white flex">{{ $swipe->contact }}</span>
+                            <span class="text-white flex">{{ $swipe->comment }}</span>
+                            <span class="text-white flex">{{ $swipe->ticket_url }}</span>
                         </div>
                     </div>
                 </div>
@@ -279,10 +268,9 @@
     {{-- SCRIPT FOR POPUP --}}
 
     <script>
-
-             function popUp() {
-                //da proverite dali da se pokaze modal ili ne
-                // vo modalot da se namestat samo eventite od izbraniot den
+        function popUp() {
+            //da proverite dali da se pokaze modal ili ne
+            // vo modalot da se namestat samo eventite od izbraniot den
 
             document.getElementById("overlay").style.display = "block";
             document.getElementById("popup").style.display = "block";
@@ -292,7 +280,6 @@
             document.getElementById("overlay").style.display = "none";
             document.getElementById("popup").style.display = "none";
         }
-
     </script>
 
 
@@ -432,12 +419,23 @@
                 events: [
                     @foreach ($events as $event)
                         {
+                            id: "{{ $event->id }}",
                             title: "{{ $event->title }}",
                             start: "{{ $event->from }}",
-                            className: "fc-event-{{ $event->company_id }}",
+                            className: @if ($event->company_id == 12)
+                                "fc-event-brainster"
+                            @elseif ($event->company_id == 13)
+                                "fc-event-mob"
+                            @elseif ($event->company_id == 14)
+                                "fc-event-laboratorium"
+                            @else
+                                "fc-event-default"
+                            @endif ,
                         },
                     @endforeach
                 ],
+
+
                 eventContent: function(arg) {
                     return {
                         html: '<div class="fc-event-container">' + arg.event.title + "</div>",
@@ -447,7 +445,7 @@
                     ////
                     ///
 
-                        popUp();
+                    popUp();
 
                 },
             });

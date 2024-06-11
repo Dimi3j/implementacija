@@ -35,7 +35,7 @@
     gap: 32px;
 }
 
-.filter-button, .search-input {
+.filter-button {
     color: white;
     border: none;
     padding: 10px 20px;
@@ -78,9 +78,44 @@
     display: block;
 }
 
-.search-input {
+/* Ensure the container is a flexbox to align items */
+.search-container {
+    display: flex;
+    align-items: center;
+    border: #8448E5 solid 1px;
     padding: 10px;
-    font-size: 16px;
     border-radius: 5px;
+}
+
+/* Style the input field */
+.search-input {
     border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 2px;
+    background-color: #101010;
+    color: #fff;
+    flex: 1; /* Make the input take the remaining space */
+}
+
+.search-input:active{
+    border: none;
+    outline: none;
+}
+
+/* Style the icon */
+.search-container .fa-magnifying-glass {
+    margin-right: 10px;
+    color: #555; /* Adjust the color as needed */
+}
+
+/* Optional: add some focus styles for the input */
+.search-input:focus {
+    border: none;
+    outline: none;
+}
+
+/* Optional: adjust the placeholder color */
+.search-input::placeholder {
+    color: #aaa; /* Adjust the placeholder color as needed */
 }

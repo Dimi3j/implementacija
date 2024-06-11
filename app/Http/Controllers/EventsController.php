@@ -29,22 +29,32 @@ class EventsController extends Controller
         return redirect()->route('events.create')->with('success', 'Event created successfully!');
     }
 
-        // Do the filtering!!!
-        // if ($request->has('filter')) {
-        //     $events = Event::where('company_name', $request->filter);
-        // } else {
-        //     $events = Event::all();
-        // }
-    public function index() // For users
+    public function index(Request $request) //events for users
     {
+        $swipers = Event::all();
         $cities = City::all();
-        $events = Event::all();
         $premiumCompanies = Company::where('premium', true)->get();
+        $query = Event::query();
 
-        return view('welcome-page', compact('events', 'cities', 'premiumCompanies'));
+        if ($request->has('filter') && $request->input('filter') != 'all') {
+            $query->where('company_id', $request->input('filter'));
+        }
+
+        if ($request->has('city')) {
+            $query->where('city_id', $request->input('city'));
+        }
+
+        if ($request->has('search')) {
+            $searchTerm = $request->input('search');
+            $query->where('title', 'like', '%' . $searchTerm . '%');
+        }
+
+        $events = $query->get();
+
+        return view('welcome-page', compact('events', 'cities', 'premiumCompanies', 'swipers'));
     }
 
-    public function allEvents()
+    public function allEvents() // events for admins
     {
         $events = Event::all();
 
@@ -58,7 +68,6 @@ class EventsController extends Controller
         $events = Event::where('company_id', $company_id)->get();
 
         return view('all-events-dash', compact('events'));
-
     }
 
     public function edit(Event $event) // Edit an existing event

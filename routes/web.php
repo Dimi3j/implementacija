@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/events', [EventsController::class, 'store'])->name('events.store');
 
     // Event edit admin panel
-    Route::get('/events/{event}/edit', [EventsController::class, 'edit'])->name('events.edit'); // when dashboard works could a user from brainster edit an event from other organisaton
+    Route::get('/events/{event}/edit', [EventsController::class, 'edit'])->name('events.edit');
     Route::put('/events/{event}', [EventsController::class, 'update'])->name('events.update');
 
     // new feature destroy (how does it work???)

@@ -107,12 +107,22 @@
 
 /* Specific color and style adjustments for events */
 .fc-event-brainster {
-    background: #ffc107; /* Custom background color for Brainster events */
-    color: #000; /* Text color */
+    background: #c9cc2c; /* Custom background color for Brainster events */
+    color: #fff; /* Text color */
 }
 
 .fc-event-mob {
-    background: #dc3545; /* Custom background color for MOB events */
+    background: #f54646; /* Custom background color for MOB events */
+    color: #fff; /* Text color */
+}
+
+.fc-event-laboratorium {
+    background: #e5a648; /* Custom background color for Laboratorium events */
+    color: #fff; /* Text color */
+}
+
+.fc-event-default {
+    background: #8448E5; /* Custom background color for All events */
     color: #fff; /* Text color */
 }
 
