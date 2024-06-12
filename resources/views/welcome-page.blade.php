@@ -32,7 +32,7 @@
             <div class="nav_links">
                 @if (Route::has('login'))
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="log_btn">Панел</a>
+                        <a href="{{ url('/dashboard') }}" class="log_btn">{{ __('Панел')}}</a>
                     @else
                         <button class="log_btn" onclick="window.location='{{ route('login') }}'">Логирај се</button>
 
