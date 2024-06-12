@@ -281,7 +281,6 @@
             //da proverite dali da se pokaze modal ili ne
             // vo modalot da se namestat samo eventite od izbraniot den
 
-
             // Step 3: Get the current date
             const currentDate = new Date();
             const currentYear = currentDate.getFullYear();
@@ -326,14 +325,11 @@
         }
 
         function closePopUp() {
+            // on close popup delete all the innerHTML so it doesnt double
             document.getElementById("overlay").style.display = "none";
             document.getElementById("popup").style.display = "none";
         }
     </script>
-
-
-
-
 
     {{-- Footer --}}
     <footer>
