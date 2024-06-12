@@ -32,7 +32,7 @@
             <div class="nav_links">
                 @if (Route::has('login'))
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="log_btn">{{ __('Панел')}}</a>
+                        <a href="{{ url('/dashboard') }}" class="log_btn">{{ __('Панел') }}</a>
                     @else
                         <button class="log_btn" onclick="window.location='{{ route('login') }}'">Логирај се</button>
 
@@ -127,18 +127,21 @@
                     <button class="dropbtn">Град <i class="fa-solid fa-arrow-down-long"></i></button>
                     <div class="dropdown-content">
                         @foreach ($cities as $city)
-                            <a href="?city={{ $city->id }}&{{ http_build_query(request()->except('city')) }}">{{ $city->name }}</a>
+                            <a
+                                href="?city={{ $city->id }}&{{ http_build_query(request()->except('city')) }}">{{ $city->name }}</a>
                         @endforeach
                     </div>
                 </div>
                 @foreach ($premiumCompanies as $company)
-                    <a href="?filter={{ $company->id }}&{{ http_build_query(request()->except('filter')) }}" class="filter-button">{{ $company->company_name }}</a>
+                    <a href="?filter={{ $company->id }}&{{ http_build_query(request()->except('filter')) }}"
+                        class="filter-button">{{ $company->company_name }}</a>
                 @endforeach
             </div>
             <div class="search-container">
                 <form method="GET" action="{{ url()->current() }}" class="search-form">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" name="search" class="search-input" placeholder="search" value="{{ request('search') }}">
+                    <input type="text" name="search" class="search-input" placeholder="search"
+                        value="{{ request('search') }}">
                     <button type="submit" style="display: none;">Search</button>
 
                     @if (request('filter') && request('filter') != 'all')
@@ -169,8 +172,23 @@
     <div id="cel-Popup1">
         <div id="popup">
             <div class="full-container">
-                <div class="scrollable-content">
-                    <div class="event-card" style="background-color: #E5A648;">
+                <div class="scrollable-content" id="event-modal">
+                    {{-- <div class="event-card" style="background-color: #E5A648;">
+                        <img src="{{ $swipe->image_url }}" alt="Event Image">
+                        <div class="items-card">
+                            <div class="left-items-card">
+                                <p>{{ \Carbon\Carbon::parse($swipe->from)->format('H:i') }}</p>
+                                <p>{{ $swipe->ticket_price }}</p>
+                                <p>{{ $swipe->contact }}</p>
+                            </div>
+                            <div class="right-items-card">
+                                <p>{{ $swipe->title}}</p>
+                                <p>{{ $cities->get($swipe->city_id)->name }}</p>
+                                <p>{{ $swipe->comment }}</p>
+                            </div>
+                        </div>
+                    </div> --}}
+                    {{-- <div class="event-card">
                         <img src="{{ $swipe->image_url }}" alt="Event Image">
                         <div class="items-card">
                             <div class="left-items-card">
@@ -199,22 +217,7 @@
                                 <p>{{ $swipe->comment }}</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="event-card">
-                        <img src="{{ $swipe->image_url }}" alt="Event Image">
-                        <div class="items-card">
-                            <div class="left-items-card">
-                                <p>{{ \Carbon\Carbon::parse($swipe->from)->format('H:i') }}</p>
-                                <p>{{ $swipe->ticket_price }}</p>
-                                <p>{{ $swipe->contact }}</p>
-                            </div>
-                            <div class="right-items-card">
-                                <p>{{ $swipe->title}}</p>
-                                <p>{{ $cities->get($swipe->city_id)->name }}</p>
-                                <p>{{ $swipe->comment }}</p>
-                            </div>
-                        </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -268,9 +271,55 @@
     {{-- SCRIPT FOR POPUP --}}
 
     <script>
+        // var events = JSON.parse("{{ json_encode($events) }}");
+        // console.log(events);
+        // var events = "{{ $events }}";
+
+        var events = JSON.parse('{!! $events->toJson() !!}');
+
         function popUp() {
             //da proverite dali da se pokaze modal ili ne
             // vo modalot da se namestat samo eventite od izbraniot den
+
+
+            // Step 3: Get the current date
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear();
+            const currentMonth = currentDate.getMonth();
+            const currentDay = currentDate.getDate();
+
+
+
+
+            events.forEach(event => {
+                // Step 4: Extract year, month, and day from both dates
+                const givenDate = new Date(event.from);
+                const givenYear = givenDate.getFullYear();
+                const givenMonth = givenDate.getMonth(); // Note: getMonth() returns month index starting from 0
+                const givenDay = givenDate.getDate();
+
+                // Step 5: Check if the year, month, and day match
+                const isToday = (givenYear === currentYear) && (givenMonth === currentMonth) && (givenDay ===
+                    currentDay);
+
+
+                if (isToday) {
+                    document.querySelector("#event-modal").innerHTML += `<div class="event-card" style="background-color: #E5A648;">
+                        <img src="${event.image_url}" alt="Event Image">
+                        <div class="items-card">
+                            <div class="left-items-card">
+                                <p>Vremeto tuka</p>
+                                <p>Cena</p>
+                                <p>kontackt</p>
+                            </div>
+                            <div class="right-items-card">
+                                <p>${event.title}</p>
+
+                            </div>
+                        </div>
+                    </div>`;
+                }
+            });
 
             document.getElementById("overlay").style.display = "block";
             document.getElementById("popup").style.display = "block";
