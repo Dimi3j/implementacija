@@ -172,7 +172,8 @@
         <div id="popup">
             <div class="full-container">
                 <div class="scrollable-content" id="event-modal">
-                    {{-- <div class="event-card" style="background-color: #E5A648;">
+                 
+                    <div class="event-card" style="background-color: #E5A648;">
                         <img src="{{ $swipe->image_url }}" alt="Event Image">
                         <div class="items-card">
                             <div class="left-items-card">
@@ -186,16 +187,16 @@
                                 <p>{{ $swipe->comment }}</p>
                             </div>
                         </div>
-                    </div> --}}
+                    </div> 
                 </div>
             </div>
         </div>
     </div>
 
 
-    {{-- KOPCE-2 - DA SE DOPRAI TREBA --}}
-
-    {{-- <div id="popup" class="popup fixed inset-0 flex items-center justify-center z-20">
+    <!-- {{-- KOPCE-2 - DA SE DOPRAI TREBA --}}
+ -->
+   <!--  {{-- <div id="popup" class="popup fixed inset-0 flex items-center justify-center z-20">
         <div class="bg-white rounded-lg shadow-lg relative">
             <span class="close absolute top-10 right-10 text-gray-600 cursor-pointer text-xl"
                 onclick="closePopUp()">X</span>
@@ -233,7 +234,7 @@
 
             </div>
         </div>
-    </div> --}}
+    </div> --}} -->
 
 
 
@@ -246,32 +247,31 @@
 
         var events = JSON.parse('{!! $events->toJson() !!}');
 
-        function popUp() {
+        function popUp(selectedDate) {
+
+            const realDate = new Date(selectedDate)
             //da proverite dali da se pokaze modal ili ne
             // vo modalot da se namestat samo eventite od izbraniot den
 
-            // Step 3: Get the current date
-            const currentDate = new Date();
-            const currentYear = currentDate.getFullYear();
-            const currentMonth = currentDate.getMonth();
-            const currentDay = currentDate.getDate();
+             // Extract the year, month, and day from the selected date
+            const selectedYear = realDate.getFullYear();
+            const selectedMonth = realDate.getMonth();
+            const selectedDay = realDate.getDate();
 
-
-
+            document.querySelector("#event-modal").innerHTML = '';
 
             events.forEach(event => {
-                // Step 4: Extract year, month, and day from both dates
-                const givenDate = new Date(event.from);
-                const givenYear = givenDate.getFullYear();
-                const givenMonth = givenDate.getMonth(); // Note: getMonth() returns month index starting from 0
-                const givenDay = givenDate.getDate();
+                // Extract year, month, and day from the event date
+                const eventDate = new Date(event.from);
+                const eventYear = eventDate.getFullYear();
+                const eventMonth = eventDate.getMonth();
+                const eventDay = eventDate.getDate();
 
-                // Step 5: Check if the year, month, and day match
-                const isToday = (givenYear === currentYear) && (givenMonth === currentMonth) && (givenDay ===
-                    currentDay);
+                // Check if the year, month, and day match
+                const isSameDay = (eventYear === selectedYear) && (eventMonth === selectedMonth) && (eventDay === selectedDay);
 
-
-                if (isToday) {
+                if (isSameDay) {
+                    console.log("yey")
                     document.querySelector("#event-modal").innerHTML += `<div class="event-card" style="background-color: #E5A648;">
                         <img src="${event.image_url}" alt="Event Image">
                         <div class="items-card">
@@ -288,13 +288,14 @@
                         </div>
                     </div>`;
                 }
-            });
+    });
 
             document.getElementById("overlay").style.display = "block";
             document.getElementById("popup").style.display = "block";
         }
 
         function closePopUp() {
+            
             // on close popup delete all the innerHTML so it doesnt double
             document.getElementById("overlay").style.display = "none";
             document.getElementById("popup").style.display = "none";
@@ -457,19 +458,16 @@
                         html: '<div class="fc-event-container">' + arg.event.title + "</div>",
                     };
                 },
-                dateClick: function() {
-                    ////
-                    ///
-
-                    popUp();
-
-                },
+                dateClick: function(info) {
+                    popUp(info.date);
+                }
             });
 
             function handleDateSelect(args) {}
 
             function handleDateClick(args) {
-                popUp();
+                /* id da passnese */
+                console.log("naj i jak")
             }
             calendar.render();
         });
