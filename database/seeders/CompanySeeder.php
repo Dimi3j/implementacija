@@ -20,10 +20,14 @@ class CompanySeeder extends Seeder
             ],
             [
                 'company_name' => 'MOB',
-                'premium' => 0
+                'premium' => 1
             ],
             [
                 'company_name' => 'Laboratorium',
+                'premium' => 1
+            ],
+            [
+                'company_name' => 'Password',
                 'premium' => 1
             ]
 

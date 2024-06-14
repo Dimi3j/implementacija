@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Brainster Next Implementacija</title>
+    <title>Next Events</title>
     @vite(['resources/css/app.css', 'resources/css/fillter.css', 'resources/css/index.css', 'resources/css/kalendar.css', 'resources/css/kopce.css', 'resources/css/swiper.css', 'resources/css/swiper2.css', 'resources/js/app.js', 'resources/js/index.js', 'resources/css/popup1.css', 'resources/fonts/poppins.css'])
-
-
 
     {{-- Swiper --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -23,6 +20,7 @@
 <body>
 
     {{-- Navbar --}}
+
     <nav class="main_nav">
         <div class="nav_container">
             <div class="logo">
@@ -60,7 +58,8 @@
         </div>
     </nav>
 
-    {{-- Hero --}}
+    {{-- Swiper/Hero --}}
+
     <section id="Hero">
         <div class="swiper-container">
             <div class="swiper mySwiper">
@@ -85,7 +84,8 @@
         </div>
     </section>
 
-    {{-- Hero 2 --}}
+    {{-- Swiper 2/Hero 2 --}}
+
     <section id="Hero2">
         <div class="swiper-container2">
             <div class="swiper mySwiper2">
@@ -120,6 +120,7 @@
     </div>
 
     {{-- Fillteri --}}
+
     <div class="filter-wrapper">
         <div class="filter-container">
             <div class="splitter">
@@ -159,15 +160,14 @@
 
 
     {{-- Kalendarot kade treba da ide --}}
+
     <section class="calendar-container">
         <div class="calendar-wrapper">
             <div id="calendar"></div>
         </div>
     </section>
 
-    {{-- Kopce --}}
-
-    {{-- KOPCE-1 --}}
+    {{-- Popup 1 all events --}}
 
     <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-10" onclick="closePopUp()"></div>
 
@@ -175,8 +175,7 @@
         <div id="popup">
             <div class="full-container">
                 <div class="scrollable-content" id="event-modal">
-
-                    <div class="event-card" style="background-color: #E5A648;">
+                    {{-- <div class="event-card" style="background-color: #E5A648;">
                         <img src="{{ $swipe->image_url }}" alt="Event Image">
                         <div class="items-card">
                             <div class="left-items-card">
@@ -190,16 +189,16 @@
                                 <p>{{ $swipe->comment }}</p>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
     </div>
 
 
-    <!-- {{-- KOPCE-2 - DA SE DOPRAI TREBA --}}
- -->
-    <!--  {{-- <div id="popup" class="popup fixed inset-0 flex items-center justify-center z-20">
+    {{-- KOPCE-2 - DA SE DOPRAI TREBA --}}
+
+    {{-- <div id="popup" class="popup fixed inset-0 flex items-center justify-center z-20">
         <div class="bg-white rounded-lg shadow-lg relative">
             <span class="close absolute top-10 right-10 text-gray-600 cursor-pointer text-xl"
                 onclick="closePopUp()">X</span>
@@ -237,24 +236,18 @@
 
             </div>
         </div>
-    </div> --}} -->
+    </div> --}}
 
 
 
     {{-- SCRIPT FOR POPUP --}}
 
     <script>
-        // var events = JSON.parse("{{ json_encode($events) }}");
-        // console.log(events);
-        // var events = "{{ $events }}";
-
         var events = JSON.parse('{!! $events->toJson() !!}');
 
         function popUp(selectedDate) {
 
             const realDate = new Date(selectedDate)
-            //da proverite dali da se pokaze modal ili ne
-            // vo modalot da se namestat samo eventite od izbraniot den
 
             // Extract the year, month, and day from the selected date
             const selectedYear = realDate.getFullYear();
@@ -278,17 +271,16 @@
 
                     let backgroundColor;
 
-                    if (event.company_id == 12) {
+                    if (event.company_id == 1) {
                         backgroundColor = "#c9cc2c";
-                    } else if (event.company_id == 13) {
+                    } else if (event.company_id == 2) {
                         backgroundColor = "#f54646";
-                    } else if (event.company_id == 14) {
+                    } else if (event.company_id == 3) {
                         backgroundColor = "#e5a648";
                     } else {
                         backgroundColor = "#8448E5";
                     };
 
-                    // console.log("yey")
                     document.querySelector("#event-modal").innerHTML +=
                         `<div class="event-card" style="background-color: ${backgroundColor};">
                         <img src="${event.image_url}" alt="Event Image">
@@ -313,8 +305,6 @@
         }
 
         function closePopUp() {
-
-            // on close popup delete all the innerHTML so it doesnt double
             document.getElementById("overlay").style.display = "none";
             document.getElementById("popup").style.display = "none";
         }
@@ -381,7 +371,7 @@
 
 
     <script>
-        // Scripts for swiper
+        // Scripts for big swiper
         var swiper = new Swiper(".mySwiper", {
             autoplay: {
                 delay: 2500,
@@ -391,6 +381,7 @@
             preventClicksPropagation: false,
         });
 
+        // Scripts for small swiper
         var swiper2 = new Swiper(".mySwiper2", {
             slidesPerView: "auto",
             spaceBetween: 50,
@@ -403,17 +394,7 @@
             swiper.slideTo(id);
         }
 
-        // Scripts for calendar
-        // function popUp() {
-        //     document.getElementById("overlay").style.display = "block";
-        //     document.getElementById("popup").style.display = "block";
-        // }
-
-        // function closePopUp() {
-        //     document.getElementById("overlay").style.display = "none";
-        //     document.getElementById("popup").style.display = "none";
-        // }
-
+        // Calendar instance
         document.addEventListener("DOMContentLoaded", function() {
             var calendarEl = document.getElementById("calendar");
             var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -459,11 +440,11 @@
                             title: "{{ $event->title }}",
                             start: "{{ $event->from }}",
                             // end: "{{ $event->to }}",
-                            className: @if ($event->company_id == 12)
+                            className: @if ($event->company_id == 1)
                                 "fc-event-brainster"
-                            @elseif ($event->company_id == 13)
+                            @elseif ($event->company_id == 2)
                                 "fc-event-mob"
-                            @elseif ($event->company_id == 14)
+                            @elseif ($event->company_id == 3)
                                 "fc-event-laboratorium"
                             @else
                                 "fc-event-default"
@@ -471,7 +452,6 @@
                         },
                     @endforeach
                 ],
-
 
                 eventContent: function(arg) {
                     return {
@@ -493,5 +473,4 @@
         });
     </script>
 </body>
-
 </html>
