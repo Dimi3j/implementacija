@@ -198,45 +198,45 @@
 
     {{-- KOPCE-2 - DA SE DOPRAI TREBA --}}
 
-    {{-- <div id="popup" class="popup fixed inset-0 flex items-center justify-center z-20">
-        <div class="bg-white rounded-lg shadow-lg relative">
-            <span class="close absolute top-10 right-10 text-gray-600 cursor-pointer text-xl"
-                onclick="closePopUp()">X</span>
-            <div>
-                <img id="picture" src="{{ Vite::asset('resources/images/pic1.png') }}" alt="Image Toni Zen">
-                <div id="mid-popup" class="flex flex-col items-center bg-[#121212] h-[270px]">
-                    <span class="text-white text-xl p-5">{{ $swipe->title }} {{ $swipe->location }}</span>
-                    <div class="flex gap-2">
-                        <div>
-                            <span class="text-white flex">Време: </span>
-                            <span class="text-white flex">Место: </span>
-                            <span class="text-white flex">Цена: </span>
-                            <span class="text-white flex">Контакт: </span>
-                            <span class="text-white flex">Промоција: </span>
-                            <span class="text-white flex">Линк до карти: </span>
-                        </div>
-                        <div>
-                            <span
-                                class="text-white flex">{{ \Carbon\Carbon::parse($swipe->from)->format('H:i') }}</span>
-                            <span class="text-white flex">{{ $swipe->location }}</span>
-                            <span class="text-white flex">{{ $swipe->ticket_price }} ден</span>
-                            <span class="text-white flex">{{ $swipe->contact }}</span>
-                            <span class="text-white flex">{{ $swipe->comment }}</span>
-                            <span class="text-white flex">{{ $swipe->ticket_url }}</span>
-                        </div>
+    <div id="popup2" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div id="modalContent" class="bg-white w-[671px] h-[643px] rounded-lg overflow-hidden relative">
+            <button id="closeModalBtn" class="absolute top-2 right-4 text-[30px] rounded-full p-2">
+                &times;
+            </button>
+            <div class="h-2/5 bg-cover bg-center"><img src="DA SE DODADE TUKA" alt="Event Image"></div>
+            <div class="p-4 text-center bg-black text-white">
+                <h2 class="text-xl pb-5">Toni Zen @Laboratorium</h2>
+                <div id="all-items" class="flex justify-center w-[100%] gap-3">
+                    <div id="left-items" class="w-[49%] flex flex-col items-end">
+                        <p>Време:</p>
+                        <p>Место:</p>
+                        <p>Цена:</p>
+                        <p>Kontakt:</p>
+                        <p>Промоција:</p>
+                        <p>Линк до карти:</p>
+                    </div>
+
+                    <div id="right-items" class="w-[49%] flex flex-col items-start">
+                        <p>22:30</p>
+                        <p>Лабораториум</p>
+                        <p> 150ден</p>
+                        <p> +38970126456</p>
+                        <p> -50% пијалоци</p>
+                        <p> <a href="https://www.kkzs.mk" class="text-blue-500 underline">www.kkzs.mk</a></p>
                     </div>
                 </div>
-
-                <div id="location">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2965.208370871187!2d21.489269186523444!3d41.995803443803865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13543f007e5ba151%3A0x7b55ead34c3a9378!2sKozara%20dooel!5e0!3m2!1sen!2smk!4v1717097913831!5m2!1sen!2smk"
-                        width="871" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-
+            </div>
+            <div class="h-2/5">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509856!2d144.95373631561668!3d-37.81627974202157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577bd4e4f76f5b8!2sLaboratorium!5e0!3m2!1sen!2sus!4v1623344044064!5m2!1sen!2sus"
+                    width="100%"
+                    height="100%"
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
             </div>
         </div>
-    </div> --}}
+    </div>
 
 
 
@@ -466,8 +466,21 @@
             function handleDateSelect(args) {}
 
             function handleDateClick(args) {
-                /* id da passnese */
+                document.getElementById('popup2').classList.remove('hidden');
                 console.log("naj i jak")
+
+                document.getElementById('closeModalBtn').addEventListener('click', function() {
+                document.getElementById('popup2').classList.add('hidden');
+                });
+
+                document.getElementById('popup2').addEventListener('click', function(event) {
+                if (event.target === this) {
+                document.getElementById('popup2').classList.add('hidden');
+
+                    // da se doprai od popup1 koa ke se klikne da se otide na popup2
+
+            }
+        });
             }
             calendar.render();
         });
