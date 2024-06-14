@@ -34,11 +34,12 @@
                     @auth
                         <a href="{{ url('/dashboard') }}" class="log_btn">{{ __('Панел') }}</a>
                     @else
-                        <button class="log_btn" onclick="window.location='{{ route('login') }}'">{{ __('Логирај се')}}</button>
+                        <button class="log_btn"
+                            onclick="window.location='{{ route('login') }}'">{{ __('Логирај се') }}</button>
 
                         @if (Route::has('register'))
                             <button class="reg_btn"
-                                onclick="window.location='{{ route('register') }}'">{{ __('Регистрација')}}</button>
+                                onclick="window.location='{{ route('register') }}'">{{ __('Регистрација') }}</button>
                         @endif
                     @endauth
                 @endif
@@ -51,7 +52,7 @@
                     <div class="dropdown-content">
                         {{-- <a href="#">{{ __('Англиски')}}</a>
                         <a href="#">{{ __('Македонски')}}</a> --}}
-                        <a href="#">{{ __('Наскоро...')}}</a>
+                        <a href="#">{{ __('Наскоро...') }}</a>
                     </div>
                 </div>
             </div>
@@ -112,7 +113,7 @@
 
     <div class="vecer">
         <div class="vecer_container">
-            <h1>{{ __('Каде одиме вечер?')}}</h1>
+            <h1>{{ __('Каде одиме вечер?') }}</h1>
             <img src="{{ Vite::asset('resources/images/krugcinja/vecer.png') }}" alt="">
 
         </div>
@@ -122,12 +123,14 @@
     <div class="filter-wrapper">
         <div class="filter-container">
             <div class="splitter">
-                <a href="?filter=all" class="sve">{{ __('Сите настани')}} <i class="fa-solid fa-arrow-down-long"></i></a>
+                <a href="?filter=all" class="sve">{{ __('Сите настани') }} <i
+                        class="fa-solid fa-arrow-down-long"></i></a>
                 <div class="dropdown">
-                    <button class="dropbtn">{{ __('Град')}}<i class="fa-solid fa-arrow-down-long"></i></button>
+                    <button class="dropbtn">{{ __('Град') }}<i class="fa-solid fa-arrow-down-long"></i></button>
                     <div class="dropdown-content">
                         @foreach ($cities as $city)
-                            <a href="?city={{ $city->id }}&{{ http_build_query(request()->except('city')) }}">{{ $city->name }}</a>
+                            <a
+                                href="?city={{ $city->id }}&{{ http_build_query(request()->except('city')) }}">{{ $city->name }}</a>
                         @endforeach
                     </div>
                 </div>
@@ -141,7 +144,7 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                     <input type="text" name="search" class="search-input" placeholder="search"
                         value="{{ request('search') }}">
-                    <button type="submit" style="display: none;">{{ __('Пребарување')}}</button>
+                    <button type="submit" style="display: none;">{{ __('Пребарување') }}</button>
 
                     @if (request('filter') && request('filter') != 'all')
                         <input type="hidden" name="filter" value="{{ request('filter') }}">
@@ -172,7 +175,7 @@
         <div id="popup">
             <div class="full-container">
                 <div class="scrollable-content" id="event-modal">
-                 
+
                     <div class="event-card" style="background-color: #E5A648;">
                         <img src="{{ $swipe->image_url }}" alt="Event Image">
                         <div class="items-card">
@@ -182,12 +185,12 @@
                                 <p>{{ $swipe->contact }}</p>
                             </div>
                             <div class="right-items-card">
-                                <p>{{ $swipe->title}}</p>
+                                <p>{{ $swipe->title }}</p>
                                 <p>{{ $cities->get($swipe->city_id)->name }}</p>
                                 <p>{{ $swipe->comment }}</p>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>
@@ -196,7 +199,7 @@
 
     <!-- {{-- KOPCE-2 - DA SE DOPRAI TREBA --}}
  -->
-   <!--  {{-- <div id="popup" class="popup fixed inset-0 flex items-center justify-center z-20">
+    <!--  {{-- <div id="popup" class="popup fixed inset-0 flex items-center justify-center z-20">
         <div class="bg-white rounded-lg shadow-lg relative">
             <span class="close absolute top-10 right-10 text-gray-600 cursor-pointer text-xl"
                 onclick="closePopUp()">X</span>
@@ -253,7 +256,7 @@
             //da proverite dali da se pokaze modal ili ne
             // vo modalot da se namestat samo eventite od izbraniot den
 
-             // Extract the year, month, and day from the selected date
+            // Extract the year, month, and day from the selected date
             const selectedYear = realDate.getFullYear();
             const selectedMonth = realDate.getMonth();
             const selectedDay = realDate.getDate();
@@ -268,11 +271,26 @@
                 const eventDay = eventDate.getDate();
 
                 // Check if the year, month, and day match
-                const isSameDay = (eventYear === selectedYear) && (eventMonth === selectedMonth) && (eventDay === selectedDay);
+                const isSameDay = (eventYear === selectedYear) && (eventMonth === selectedMonth) && (eventDay ===
+                    selectedDay);
 
                 if (isSameDay) {
-                    console.log("yey")
-                    document.querySelector("#event-modal").innerHTML += `<div class="event-card" style="background-color: #E5A648;">
+
+                    let backgroundColor;
+
+                    if (event.company_id == 12) {
+                        backgroundColor = "#c9cc2c";
+                    } else if (event.company_id == 13) {
+                        backgroundColor = "#f54646";
+                    } else if (event.company_id == 14) {
+                        backgroundColor = "#e5a648";
+                    } else {
+                        backgroundColor = "#8448E5";
+                    };
+
+                    // console.log("yey")
+                    document.querySelector("#event-modal").innerHTML +=
+                        `<div class="event-card" style="background-color: ${backgroundColor};">
                         <img src="${event.image_url}" alt="Event Image">
                         <div class="items-card">
                             <div class="left-items-card">
@@ -288,14 +306,14 @@
                         </div>
                     </div>`;
                 }
-    });
+            });
 
             document.getElementById("overlay").style.display = "block";
             document.getElementById("popup").style.display = "block";
         }
 
         function closePopUp() {
-            
+
             // on close popup delete all the innerHTML so it doesnt double
             document.getElementById("overlay").style.display = "none";
             document.getElementById("popup").style.display = "none";
@@ -405,6 +423,7 @@
                 timeZone: "Europe/Skopje",
                 height: "auto",
                 themeSystem: "bootstrap",
+                // nextDayThreshold: '23:00:00',
                 slotDuration: {
                     days: 1
                 },
@@ -439,6 +458,7 @@
                             id: "{{ $event->id }}",
                             title: "{{ $event->title }}",
                             start: "{{ $event->from }}",
+                            // end: "{{ $event->to }}",
                             className: @if ($event->company_id == 12)
                                 "fc-event-brainster"
                             @elseif ($event->company_id == 13)
