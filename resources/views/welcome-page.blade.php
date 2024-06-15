@@ -194,11 +194,12 @@
             </div>
         </div>
     </div>
+    
 
 
     {{-- KOPCE-2 - DA SE DOPRAI TREBA --}}
 
-    <div id="popup2" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <!-- <div id="popup2" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
         <div id="modalContent" class="bg-white w-[671px] h-[643px] rounded-lg overflow-hidden relative">
             <button id="closeModalBtn" class="absolute top-2 right-4 text-[30px] rounded-full p-2">
                 &times;
@@ -236,8 +237,14 @@
                 </iframe>
             </div>
         </div>
-    </div>
+    </div> -->
 
+
+    <div id="popup2" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div id="modalContent" class="bg-white w-[671px] h-[643px] rounded-lg overflow-hidden relative">
+            
+        </div>
+    </div>
 
 
     {{-- SCRIPT FOR POPUP --}}
@@ -257,6 +264,7 @@
             document.querySelector("#event-modal").innerHTML = '';
 
             events.forEach(event => {
+                console.log(event);
                 // Extract year, month, and day from the event date
                 const eventDate = new Date(event.from);
                 const eventYear = eventDate.getFullYear();
@@ -282,21 +290,24 @@
                     };
 
                     document.querySelector("#event-modal").innerHTML +=
-                        `<div class="event-card" style="background-color: ${backgroundColor};">
-                        <img src="${event.image_url}" alt="Event Image">
-                        <div class="items-card">
-                            <div class="left-items-card">
-                                <p>${event.from}</p>
-                                <p>${event.ticket_price ? event.ticket_price : 'Free'}</p>
-                                <p>${event.contact}</p>
+                        `<div 
+                            class="event-card cursor-pointer hover:bg-opacity-75"
+                            style="background-color: ${backgroundColor};" 
+                            onclick="openPopup(${event.id})">
+                            <img src="${event.image_url}" alt="Event Image">
+                            <div class="items-card">
+                                <div class="left-items-card">
+                                    <p>${event.from}</p>
+                                    <p>${event.ticket_price ? event.ticket_price : 'Free'}</p>
+                                    <p>${event.contact}</p>
+                                </div>
+                                <div class="right-items-card">
+                                    <p>${event.title}</p>
+                                    <p>{{ $cities->get($swipe->city_id)->name }}</p>
+                                    <p>${event.comment}</p>
+                                </div>
                             </div>
-                            <div class="right-items-card">
-                                <p>${event.title}</p>
-                                <p>{{ $cities->get($swipe->city_id)->name }}</p>
-                                <p>${event.comment}</p>
-                            </div>
-                        </div>
-                    </div>`;
+                        </div>`;
                 }
             });
 
@@ -371,6 +382,90 @@
 
 
     <script>
+
+
+        var events = JSON.parse('{!! $events->toJson() !!}');
+        function openPopup(id) {
+    console.log(id);
+    var true_ID = 0;
+    if (typeof id === 'object' && id !== null && 'el' in id && 'event' in id && 'jsEvent' in id && 'view' in id) {
+        console.log("FullCalendar event click id object:", id.event.id);
+        true_ID = id.event.id;
+    } else {
+        true_ID = id;
+    }
+
+    // Clear any existing popup content
+    document.querySelector("#event-modal").innerHTML = '';
+
+    events.forEach(event => {
+        if (event.id === true_ID) {
+            const eventDate = new Date(event.from);
+            const eventHour = eventDate.getHours();
+
+            console.log(event);
+
+            const popupHtml = `
+                <div id="popup2" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+                    <div id="modalContent" class="bg-white w-[671px] h-[643px] rounded-lg overflow-hidden relative">
+                        <button id="closeModalBtn" class="absolute top-2 right-4 text-[30px] rounded-full p-2">
+                            &times;
+                        </button>
+                        <div class="h-2/5 bg-cover bg-center"><img src="${event.image_url}" alt="Event Image"></div>
+                        <div class="p-4 text-center bg-black text-white">
+                            <h2 class="text-xl pb-5">${event.title}</h2>
+                            <div id="all-items" class="flex justify-center w-[100%] gap-3">
+                                <div id="left-items" class="w-[49%] flex flex-col items-end">
+                                    <p>Време:</p>
+                                    <p>Место:</p>
+                                    <p>Цена:</p>
+                                    <p>Контакт:</p>
+                                    <p>Промоција:</p>
+                                    <p>Линк до карти:</p>
+                                </div>
+                                <div id="right-items" class="w-[49%] flex flex-col items-start">
+                                    <p>${eventHour}</p>
+                                    <p>${event.location}</p>
+                                    <p>${event.ticket_price ? event.ticket_price : 'Free'}</p>
+                                    <p>${event.contact}</p>
+                                    <p> -50% пијалоци</p>
+                                    <p> <a href="${event.ticket_url}" class="text-blue-500 underline">${event.ticket_url}</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="h-2/5">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509856!2d144.95373631561668!3d-37.81627974202157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577bd4e4f76f5b8!2sLaboratorium!5e0!3m2!1sen!2sus!4v1623344044064!5m2!1sen!2sus"
+                                width="100%"
+                                height="100%"
+                                allowfullscreen=""
+                                loading="lazy">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>`;
+
+            // Add the new popup content to the DOM
+            document.querySelector("#event-modal").innerHTML = popupHtml;
+            
+            // Now that the new content is in the DOM, manipulate the class list
+            document.getElementById('popup2').classList.remove('hidden');
+            
+            // Add event listeners for closing the popup
+            document.getElementById('closeModalBtn').addEventListener('click', function() {
+                document.getElementById('popup2').classList.add('hidden');
+            });
+
+            document.getElementById('popup2').addEventListener('click', function(event) {
+                if (event.target === this) {
+                    document.getElementById('popup2').classList.add('hidden');
+                }
+            });
+        }
+    });
+}
+
+
         // Scripts for big swiper
         var swiper = new Swiper(".mySwiper", {
             autoplay: {
@@ -465,22 +560,8 @@
 
             function handleDateSelect(args) {}
 
-            function handleDateClick(args) {
-                document.getElementById('popup2').classList.remove('hidden');
-                console.log("naj i jak")
-
-                document.getElementById('closeModalBtn').addEventListener('click', function() {
-                document.getElementById('popup2').classList.add('hidden');
-                });
-
-                document.getElementById('popup2').addEventListener('click', function(event) {
-                if (event.target === this) {
-                document.getElementById('popup2').classList.add('hidden');
-
-                    // da se doprai od popup1 koa ke se klikne da se otide na popup2
-
-            }
-        });
+            function handleDateClick(info) {
+                popUp(info.date);
             }
             calendar.render();
         });
