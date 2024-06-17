@@ -420,7 +420,7 @@
                                     <p>Место:</p>
                                     <p>Цена:</p>
                                     <p>Контакт:</p>
-                                    <p>Промоција:</p>
+                                    <p>Информации:</p>
                                     <p>Линк до карти:</p>
                                 </div>
                                 <div id="right-items" class="w-[49%] flex flex-col items-start">
@@ -428,8 +428,8 @@
                                     <p>${event.location}</p>
                                     <p>${event.ticket_price ? event.ticket_price : 'Free'}</p>
                                     <p>${event.contact}</p>
-                                    <p> -50% пијалоци</p>
-                                    <p> <a href="${event.ticket_url}" class="text-blue-500 underline">${event.ticket_url}</a></p>
+                                    <p>${event.comment}</p>
+                                    <p> <a href="${event.ticket_url}" class="text-blue-500 underline">${event.ticket_url ? event.ticket_url : 'Free Entry'}</a></p>
                                 </div>
                             </div>
                         </div>
