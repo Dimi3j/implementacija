@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -194,7 +195,7 @@
             </div>
         </div>
     </div>
-    
+
 
 
     {{-- KOPCE-2 - DA SE DOPRAI TREBA --}}
@@ -242,7 +243,7 @@
 
     <div id="popup2" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
         <div id="modalContent" class="bg-white w-[671px] h-[643px] rounded-lg overflow-hidden relative">
-            
+
         </div>
     </div>
 
@@ -290,9 +291,9 @@
                     };
 
                     document.querySelector("#event-modal").innerHTML +=
-                        `<div 
+                        `<div
                             class="event-card cursor-pointer hover:bg-opacity-75"
-                            style="background-color: ${backgroundColor};" 
+                            style="background-color: ${backgroundColor};"
                             onclick="openPopup(${event.id})">
                             <img src="${event.image_url}" alt="Event Image">
                             <div class="items-card">
@@ -382,30 +383,29 @@
 
 
     <script>
-
-
         var events = JSON.parse('{!! $events->toJson() !!}');
+
         function openPopup(id) {
-    console.log(id);
-    var true_ID = 0;
-    if (typeof id === 'object' && id !== null && 'el' in id && 'event' in id && 'jsEvent' in id && 'view' in id) {
-        console.log("FullCalendar event click id object:", id.event.id);
-        true_ID = id.event.id;
-    } else {
-        true_ID = id;
-    }
+            console.log(id);
+            var true_ID = 0;
+            if (typeof id === 'object' && id !== null && 'el' in id && 'event' in id && 'jsEvent' in id && 'view' in id) {
+                console.log("FullCalendar event click id object:", id.event.id);
+                true_ID = id.event.id;
+            } else {
+                true_ID = id;
+            }
 
-    // Clear any existing popup content
-    document.querySelector("#event-modal").innerHTML = '';
+            // Clear any existing popup content
+            document.querySelector("#event-modal").innerHTML = '';
 
-    events.forEach(event => {
-        if (event.id === true_ID) {
-            const eventDate = new Date(event.from);
-            const eventHour = eventDate.getHours();
+            events.forEach(event => {
+                if (event.id === true_ID) {
+                    const eventDate = new Date(event.from);
+                    const eventHour = eventDate.getHours();
 
-            console.log(event);
+                    console.log(event);
 
-            const popupHtml = `
+                    const popupHtml = `
                 <div id="popup2" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
                     <div id="modalContent" class="bg-white w-[671px] h-[643px] rounded-lg overflow-hidden relative">
                         <button id="closeModalBtn" class="absolute top-2 right-4 text-[30px] rounded-full p-2">
@@ -445,25 +445,25 @@
                     </div>
                 </div>`;
 
-            // Add the new popup content to the DOM
-            document.querySelector("#event-modal").innerHTML = popupHtml;
-            
-            // Now that the new content is in the DOM, manipulate the class list
-            document.getElementById('popup2').classList.remove('hidden');
-            
-            // Add event listeners for closing the popup
-            document.getElementById('closeModalBtn').addEventListener('click', function() {
-                document.getElementById('popup2').classList.add('hidden');
-            });
+                    // Add the new popup content to the DOM
+                    document.querySelector("#event-modal").innerHTML = popupHtml;
 
-            document.getElementById('popup2').addEventListener('click', function(event) {
-                if (event.target === this) {
-                    document.getElementById('popup2').classList.add('hidden');
+                    // Now that the new content is in the DOM, manipulate the class list
+                    document.getElementById('popup2').classList.remove('hidden');
+
+                    // Add event listeners for closing the popup
+                    document.getElementById('closeModalBtn').addEventListener('click', function() {
+                        document.getElementById('popup2').classList.add('hidden');
+                    });
+
+                    document.getElementById('popup2').addEventListener('click', function(event) {
+                        if (event.target === this) {
+                            document.getElementById('popup2').classList.add('hidden');
+                        }
+                    });
                 }
             });
         }
-    });
-}
 
 
         // Scripts for big swiper
@@ -567,4 +567,5 @@
         });
     </script>
 </body>
+
 </html>
