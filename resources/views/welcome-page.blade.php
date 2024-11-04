@@ -4,10 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Brainster Next Implementacija</title>
+    <title>Next Events</title>
     @vite(['resources/css/app.css', 'resources/css/fillter.css', 'resources/css/index.css', 'resources/css/kalendar.css', 'resources/css/kopce.css', 'resources/css/swiper.css', 'resources/css/swiper2.css', 'resources/js/app.js', 'resources/js/index.js', 'resources/css/popup1.css', 'resources/fonts/poppins.css'])
-
-
 
     {{-- Swiper --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -23,6 +21,7 @@
 <body>
 
     {{-- Navbar --}}
+
     <nav class="main_nav">
         <div class="nav_container">
             <div class="logo">
@@ -60,7 +59,8 @@
         </div>
     </nav>
 
-    {{-- Hero --}}
+    {{-- Swiper/Hero --}}
+
     <section id="Hero">
         <div class="swiper-container">
             <div class="swiper mySwiper">
@@ -85,7 +85,8 @@
         </div>
     </section>
 
-    {{-- Hero 2 --}}
+    {{-- Swiper 2/Hero 2 --}}
+
     <section id="Hero2">
         <div class="swiper-container2">
             <div class="swiper mySwiper2">
@@ -120,6 +121,7 @@
     </div>
 
     {{-- Fillteri --}}
+
     <div class="filter-wrapper">
         <div class="filter-container">
             <div class="splitter">
@@ -159,15 +161,14 @@
 
 
     {{-- Kalendarot kade treba da ide --}}
+
     <section class="calendar-container">
         <div class="calendar-wrapper">
             <div id="calendar"></div>
         </div>
     </section>
 
-    {{-- Kopce --}}
-
-    {{-- KOPCE-1 --}}
+    {{-- Popup 1 all events --}}
 
     <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-10" onclick="closePopUp()"></div>
 
@@ -177,6 +178,7 @@
                 <div class="scrollable-content" id="event-modal">
 
                     <div class="event-card" style="background-color: #E5A648;">
+                    {{-- <div class="event-card" style="background-color: #E5A648;">
                         <img src="{{ $swipe->image_url }}" alt="Event Image">
                         <div class="items-card">
                             <div class="left-items-card">
@@ -191,70 +193,72 @@
                             </div>
                         </div>
                     </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
     </div>
 
 
-    <!-- {{-- KOPCE-2 - DA SE DOPRAI TREBA --}}
- -->
-    <!--  {{-- <div id="popup" class="popup fixed inset-0 flex items-center justify-center z-20">
-        <div class="bg-white rounded-lg shadow-lg relative">
-            <span class="close absolute top-10 right-10 text-gray-600 cursor-pointer text-xl"
-                onclick="closePopUp()">X</span>
-            <div>
-                <img id="picture" src="{{ Vite::asset('resources/images/pic1.png') }}" alt="Image Toni Zen">
-                <div id="mid-popup" class="flex flex-col items-center bg-[#121212] h-[270px]">
-                    <span class="text-white text-xl p-5">{{ $swipe->title }} {{ $swipe->location }}</span>
-                    <div class="flex gap-2">
-                        <div>
-                            <span class="text-white flex">Време: </span>
-                            <span class="text-white flex">Место: </span>
-                            <span class="text-white flex">Цена: </span>
-                            <span class="text-white flex">Контакт: </span>
-                            <span class="text-white flex">Промоција: </span>
-                            <span class="text-white flex">Линк до карти: </span>
-                        </div>
-                        <div>
-                            <span
-                                class="text-white flex">{{ \Carbon\Carbon::parse($swipe->from)->format('H:i') }}</span>
-                            <span class="text-white flex">{{ $swipe->location }}</span>
-                            <span class="text-white flex">{{ $swipe->ticket_price }} ден</span>
-                            <span class="text-white flex">{{ $swipe->contact }}</span>
-                            <span class="text-white flex">{{ $swipe->comment }}</span>
-                            <span class="text-white flex">{{ $swipe->ticket_url }}</span>
-                        </div>
+
+    {{-- KOPCE-2 - DA SE DOPRAI TREBA --}}
+
+    <!-- <div id="popup2" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div id="modalContent" class="bg-white w-[671px] h-[643px] rounded-lg overflow-hidden relative">
+            <button id="closeModalBtn" class="absolute top-2 right-4 text-[30px] rounded-full p-2">
+                &times;
+            </button>
+            <div class="h-2/5 bg-cover bg-center"><img src="DA SE DODADE TUKA" alt="Event Image"></div>
+            <div class="p-4 text-center bg-black text-white">
+                <h2 class="text-xl pb-5">Toni Zen @Laboratorium</h2>
+                <div id="all-items" class="flex justify-center w-[100%] gap-3">
+                    <div id="left-items" class="w-[49%] flex flex-col items-end">
+                        <p>Време:</p>
+                        <p>Место:</p>
+                        <p>Цена:</p>
+                        <p>Kontakt:</p>
+                        <p>Промоција:</p>
+                        <p>Линк до карти:</p>
+                    </div>
+
+                    <div id="right-items" class="w-[49%] flex flex-col items-start">
+                        <p>22:30</p>
+                        <p>Лабораториум</p>
+                        <p> 150ден</p>
+                        <p> +38970126456</p>
+                        <p> -50% пијалоци</p>
+                        <p> <a href="https://www.kkzs.mk" class="text-blue-500 underline">www.kkzs.mk</a></p>
                     </div>
                 </div>
-
-                <div id="location">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2965.208370871187!2d21.489269186523444!3d41.995803443803865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13543f007e5ba151%3A0x7b55ead34c3a9378!2sKozara%20dooel!5e0!3m2!1sen!2smk!4v1717097913831!5m2!1sen!2smk"
-                        width="871" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-
+            </div>
+            <div class="h-2/5">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509856!2d144.95373631561668!3d-37.81627974202157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577bd4e4f76f5b8!2sLaboratorium!5e0!3m2!1sen!2sus!4v1623344044064!5m2!1sen!2sus"
+                    width="100%"
+                    height="100%"
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
             </div>
         </div>
-    </div> --}} -->
+    </div> -->
 
+
+    <div id="popup2" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div id="modalContent" class="bg-white w-[671px] h-[643px] rounded-lg overflow-hidden relative">
+
+        </div>
+    </div>
 
 
     {{-- SCRIPT FOR POPUP --}}
 
     <script>
-        // var events = JSON.parse("{{ json_encode($events) }}");
-        // console.log(events);
-        // var events = "{{ $events }}";
-
         var events = JSON.parse('{!! $events->toJson() !!}');
 
         function popUp(selectedDate) {
 
             const realDate = new Date(selectedDate)
-            //da proverite dali da se pokaze modal ili ne
-            // vo modalot da se namestat samo eventite od izbraniot den
 
             // Extract the year, month, and day from the selected date
             const selectedYear = realDate.getFullYear();
@@ -264,6 +268,7 @@
             document.querySelector("#event-modal").innerHTML = '';
 
             events.forEach(event => {
+                console.log(event);
                 // Extract year, month, and day from the event date
                 const eventDate = new Date(event.from);
                 const eventYear = eventDate.getFullYear();
@@ -278,33 +283,35 @@
 
                     let backgroundColor;
 
-                    if (event.company_id == 12) {
+                    if (event.company_id == 1) {
                         backgroundColor = "#c9cc2c";
-                    } else if (event.company_id == 13) {
+                    } else if (event.company_id == 2) {
                         backgroundColor = "#f54646";
-                    } else if (event.company_id == 14) {
+                    } else if (event.company_id == 3) {
                         backgroundColor = "#e5a648";
                     } else {
                         backgroundColor = "#8448E5";
                     };
 
-                    // console.log("yey")
                     document.querySelector("#event-modal").innerHTML +=
-                        `<div class="event-card" style="background-color: ${backgroundColor};">
-                        <img src="${event.image_url}" alt="Event Image">
-                        <div class="items-card">
-                            <div class="left-items-card">
-                                <p>${event.from}</p>
-                                <p>${event.ticket_price ? event.ticket_price : 'Free'}</p>
-                                <p>${event.contact}</p>
+                        `<div
+                            class="event-card cursor-pointer hover:bg-opacity-75"
+                            style="background-color: ${backgroundColor};"
+                            onclick="openPopup(${event.id})">
+                            <img src="${event.image_url}" alt="Event Image">
+                            <div class="items-card">
+                                <div class="left-items-card">
+                                    <p>${event.from}</p>
+                                    <p>${event.ticket_price ? event.ticket_price : 'Free'}</p>
+                                    <p>${event.contact}</p>
+                                </div>
+                                <div class="right-items-card">
+                                    <p>${event.title}</p>
+                                    <p>{{ $cities->get($swipe->city_id)->name }}</p>
+                                    <p>${event.comment}</p>
+                                </div>
                             </div>
-                            <div class="right-items-card">
-                                <p>${event.title}</p>
-                                <p>{{ $cities->get($swipe->city_id)->name }}</p>
-                                <p>${event.comment}</p>
-                            </div>
-                        </div>
-                    </div>`;
+                        </div>`;
                 }
             });
 
@@ -381,7 +388,90 @@
 
 
     <script>
-        // Scripts for swiper
+        var events = JSON.parse('{!! $events->toJson() !!}');
+
+        function openPopup(id) {
+            console.log(id);
+            var true_ID = 0;
+            if (typeof id === 'object' && id !== null && 'el' in id && 'event' in id && 'jsEvent' in id && 'view' in id) {
+                console.log("FullCalendar event click id object:", id.event.id);
+                true_ID = id.event.id;
+            } else {
+                true_ID = id;
+            }
+
+            // Clear any existing popup content
+            document.querySelector("#event-modal").innerHTML = '';
+
+            events.forEach(event => {
+                if (event.id === true_ID) {
+                    const eventDate = new Date(event.from);
+                    const eventHour = eventDate.getHours();
+
+                    console.log(event);
+
+                    const popupHtml = `
+                <div id="popup2" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+                    <div id="modalContent" class="bg-white w-[671px] h-[643px] rounded-lg overflow-hidden relative">
+                        <button id="closeModalBtn" class="absolute top-2 right-4 text-[30px] rounded-full p-2">
+                            &times;
+                        </button>
+                        <div class="h-2/5 bg-cover bg-center"><img src="${event.image_url}" alt="Event Image"></div>
+                        <div class="p-4 text-center bg-black text-white">
+                            <h2 class="text-xl pb-5">${event.title}</h2>
+                            <div id="all-items" class="flex justify-center w-[100%] gap-3">
+                                <div id="left-items" class="w-[49%] flex flex-col items-end">
+                                    <p>Време:</p>
+                                    <p>Место:</p>
+                                    <p>Цена:</p>
+                                    <p>Контакт:</p>
+                                    <p>Информации:</p>
+                                    <p>Линк до карти:</p>
+                                </div>
+                                <div id="right-items" class="w-[49%] flex flex-col items-start">
+                                    <p>${eventHour}</p>
+                                    <p>${event.location}</p>
+                                    <p>${event.ticket_price ? event.ticket_price : 'Free'}</p>
+                                    <p>${event.contact}</p>
+                                    <p>${event.comment}</p>
+                                    <p> <a href="${event.ticket_url}" class="text-blue-500 underline">${event.ticket_url ? event.ticket_url : 'Free Entry'}</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="h-2/5">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509856!2d144.95373631561668!3d-37.81627974202157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577bd4e4f76f5b8!2sLaboratorium!5e0!3m2!1sen!2sus!4v1623344044064!5m2!1sen!2sus"
+                                width="100%"
+                                height="100%"
+                                allowfullscreen=""
+                                loading="lazy">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>`;
+
+                    // Add the new popup content to the DOM
+                    document.querySelector("#event-modal").innerHTML = popupHtml;
+
+                    // Now that the new content is in the DOM, manipulate the class list
+                    document.getElementById('popup2').classList.remove('hidden');
+
+                    // Add event listeners for closing the popup
+                    document.getElementById('closeModalBtn').addEventListener('click', function() {
+                        document.getElementById('popup2').classList.add('hidden');
+                    });
+
+                    document.getElementById('popup2').addEventListener('click', function(event) {
+                        if (event.target === this) {
+                            document.getElementById('popup2').classList.add('hidden');
+                        }
+                    });
+                }
+            });
+        }
+
+
+        // Scripts for big swiper
         var swiper = new Swiper(".mySwiper", {
             autoplay: {
                 delay: 2500,
@@ -391,6 +481,7 @@
             preventClicksPropagation: false,
         });
 
+        // Scripts for small swiper
         var swiper2 = new Swiper(".mySwiper2", {
             slidesPerView: "auto",
             spaceBetween: 50,
@@ -403,17 +494,7 @@
             swiper.slideTo(id);
         }
 
-        // Scripts for calendar
-        // function popUp() {
-        //     document.getElementById("overlay").style.display = "block";
-        //     document.getElementById("popup").style.display = "block";
-        // }
-
-        // function closePopUp() {
-        //     document.getElementById("overlay").style.display = "none";
-        //     document.getElementById("popup").style.display = "none";
-        // }
-
+        // Calendar instance
         document.addEventListener("DOMContentLoaded", function() {
             var calendarEl = document.getElementById("calendar");
             var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -459,11 +540,11 @@
                             title: "{{ $event->title }}",
                             start: "{{ $event->from }}",
                             // end: "{{ $event->to }}",
-                            className: @if ($event->company_id == 12)
+                            className: @if ($event->company_id == 1)
                                 "fc-event-brainster"
-                            @elseif ($event->company_id == 13)
+                            @elseif ($event->company_id == 2)
                                 "fc-event-mob"
-                            @elseif ($event->company_id == 14)
+                            @elseif ($event->company_id == 3)
                                 "fc-event-laboratorium"
                             @else
                                 "fc-event-default"
@@ -471,7 +552,6 @@
                         },
                     @endforeach
                 ],
-
 
                 eventContent: function(arg) {
                     return {
@@ -485,9 +565,8 @@
 
             function handleDateSelect(args) {}
 
-            function handleDateClick(args) {
-                /* id da passnese */
-                console.log("naj i jak")
+            function handleDateClick(info) {
+                popUp(info.date);
             }
             calendar.render();
         });
